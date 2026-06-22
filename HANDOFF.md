@@ -28,8 +28,8 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | T5 | Rich Content Components | Completed |
 | T6 | Floating Actions And Common Controls | Completed |
 | T7 | Local Preview Implementation | Completed |
-| T8 | Documentation For Local Validation | Pending |
-| T9 | Local Verification | Pending |
+| T8 | Documentation For Local Validation | Completed |
+| T9 | Local Verification | Completed |
 | T10 | Final Acceptance Pass | Pending |
 
 ## Completed Steps
@@ -730,6 +730,87 @@ Known risks:
 
 - Visual correctness, responsive behavior, table overflow, and FAB overlap still need
   browser verification in T9.
+
+### 2026-06-22 - T8/T9 Local Validation And Verification
+
+Files changed:
+
+- `README.md`
+- `serve-preview.mjs`
+- `preview.html`
+- `wiki.css`
+- `.gitignore`
+- `HANDOFF.md`
+
+Completed:
+
+- Added `README.md` with local preview instructions, validation checklist, and Wiki.js
+  custom CSS application guidance.
+- Added `serve-preview.mjs`, a zero-dependency local Node static server for previewing
+  `preview.html`; this is a local validation tool only.
+- Updated `preview.html` helper layout so desktop and mobile preview widths are more
+  reliable.
+- Adjusted mobile table CSS so wide documentation tables scroll inside
+  `.table-responsive` instead of forcing page-level horizontal overflow.
+- Added `.gitignore` entry for local `verification/` artifacts.
+- Started local preview server at `http://127.0.0.1:4173/preview.html`.
+
+Local server:
+
+- Command: `node .\serve-preview.mjs`
+- URL: `http://127.0.0.1:4173/preview.html`
+- PID at verification time: `47512`
+- Port status at verification time: `127.0.0.1:4173 Listen 47512`
+
+T8 convergence checks:
+
+- README explains local preview commands: Passed.
+- Wiki.js custom CSS application is described at a high level without inventing
+  unsupported admin screens, file paths, theme package formats, or build workflows:
+  Passed.
+- Acceptance checklist is available to the user: Passed.
+
+T9 convergence checks:
+
+- Local server starts successfully: Passed.
+- `preview.html` loads the CSS: Passed, HTTP 200 for both `preview.html` and
+  `wiki.css`.
+- Visual scan confirms Confluence-like direction and no obvious old teal identity
+  remains: Passed by desktop/mobile Chrome screenshots.
+- Responsive behavior is checked by viewport inspection: Passed for desktop
+  `1440x1100` and mobile `390x1100` screenshots.
+- Git status is reported: Passed before commit; only expected files changed and
+  `verification/` is ignored.
+
+Verification:
+
+- Checked port 4173 before startup; no listener found.
+- Attempted `npx http-server`; it did not stay available, so it was stopped and
+  replaced with the zero-dependency Node preview server.
+- Requested `http://127.0.0.1:4173/preview.html`: HTTP 200, length 12125 before final
+  preview edits.
+- Requested `http://127.0.0.1:4173/wiki.css`: HTTP 200, length 18481 before final CSS
+  mobile table edit.
+- Generated Chrome headless screenshots:
+  - `verification/preview-desktop.png`
+  - `verification/preview-mobile.png`
+- Inspected screenshots manually: desktop and mobile previews are readable, shell is
+  white/light-gray, navigation active state is blue, and rich content is visible.
+- Used Chrome DevTools Protocol on a mobile viewport to inspect overflow:
+  document-level `scrollWidth` did not exceed client width; wide table overflow is
+  contained by the table area.
+- Ran grep checks for old visual patterns in `wiki.css`, `preview.html`, and
+  `README.md`. Only README prose mentions "uppercase" as a negative checklist item.
+- Ran grep checks for unsupported mechanisms. README mentions theme package/plugin only
+  to say not to use them; `wiki.css` and `preview.html` do not depend on those
+  mechanisms.
+
+Known risks:
+
+- `serve-preview.mjs` is a local validation helper, not part of Wiki.js runtime.
+- Live Wiki.js instance testing is still required in T10/final acceptance because
+  `preview.html` is a representative mock DOM, not the real Wiki.js application.
+- Broad Vuetify utility selector impact should still be watched in real Wiki.js.
 
 ## Active Notes
 

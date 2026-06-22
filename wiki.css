@@ -616,7 +616,11 @@
   }
 
   #root .v-application .v-main .contents table {
-    display: block;
+    min-width: 560px;
+  }
+
+  #root .v-application .v-main .contents .table-responsive,
+  #root .v-application .v-main .contents .v-data-table {
     max-width: 100%;
     overflow-x: auto;
   }
