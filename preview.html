@@ -115,11 +115,75 @@
     }
 
     .v-icon {
+      align-items: center;
       display: inline-flex;
       flex: 0 0 auto;
       font-style: normal;
       justify-content: center;
-      width: 18px;
+      min-height: 20px;
+      width: 20px;
+    }
+
+    .preview-icon {
+      border: 1.5px solid currentColor;
+      border-radius: 3px;
+      display: inline-block;
+      height: 14px;
+      position: relative;
+      width: 14px;
+    }
+
+    .preview-icon.page::after {
+      background: currentColor;
+      content: "";
+      height: 1.5px;
+      left: 3px;
+      position: absolute;
+      top: 4px;
+      width: 6px;
+    }
+
+    .preview-icon.active::before {
+      background: currentColor;
+      content: "";
+      height: 1.5px;
+      left: 3px;
+      position: absolute;
+      top: 8px;
+      width: 7px;
+    }
+
+    .preview-chevron {
+      border-bottom: 1.7px solid currentColor;
+      border-right: 1.7px solid currentColor;
+      display: inline-block;
+      height: 7px;
+      transform: rotate(45deg);
+      width: 7px;
+    }
+
+    .preview-chevron.right {
+      transform: rotate(-45deg);
+    }
+
+    .preview-search-icon {
+      border: 1.6px solid currentColor;
+      border-radius: 50%;
+      display: inline-block;
+      height: 14px;
+      position: relative;
+      width: 14px;
+    }
+
+    .preview-search-icon::after {
+      background: currentColor;
+      content: "";
+      height: 1.6px;
+      position: absolute;
+      right: -5px;
+      top: 10px;
+      transform: rotate(45deg);
+      width: 6px;
     }
 
     .v-divider {
@@ -275,7 +339,7 @@
           </div>
           <div class="preview-search v-input v-input--is-focused">
             <div class="v-input__slot">
-              <span class="v-icon">⌕</span>
+              <span class="v-icon"><span class="preview-search-icon"></span></span>
               <input value="Search documentation">
             </div>
           </div>
@@ -289,26 +353,26 @@
             <div class="v-list primary">
               <div class="v-subheader">Space navigation</div>
               <div class="v-list-item v-list-item--active">
-                <span class="v-icon">▣</span>
+                <span class="v-icon"><span class="preview-icon page active"></span></span>
                 <div class="v-list-item__content">
                   <div class="v-list-item__title">Confluence-like theme</div>
                   <div class="v-list-item__subtitle">Current page</div>
                 </div>
               </div>
               <div class="v-list-item">
-                <span class="v-icon">▢</span>
+                <span class="v-icon"><span class="preview-icon page"></span></span>
                 <div class="v-list-item__content">
                   <div class="v-list-item__title">Getting started</div>
                   <div class="v-list-item__subtitle">Overview and setup</div>
                 </div>
               </div>
               <div class="v-list-group__header">
-                <span class="v-list-group__header__prepend-icon v-icon">▸</span>
+                <span class="v-list-group__header__prepend-icon v-icon"><span class="preview-chevron right"></span></span>
                 <span class="v-list-group__header__content">Administration</span>
-                <span class="v-list-group__header__append-icon v-icon">⌄</span>
+                <span class="v-list-group__header__append-icon v-icon"><span class="preview-chevron"></span></span>
               </div>
               <div class="v-list-item">
-                <span class="v-icon">▢</span>
+                <span class="v-icon"><span class="preview-icon page"></span></span>
                 <div class="v-list-item__content">
                   <div class="v-list-item__title">Custom CSS</div>
                   <div class="v-list-item__subtitle">Override surface only</div>

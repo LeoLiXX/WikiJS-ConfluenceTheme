@@ -812,6 +812,64 @@ Known risks:
   `preview.html` is a representative mock DOM, not the real Wiki.js application.
 - Broad Vuetify utility selector impact should still be watched in real Wiki.js.
 
+### 2026-06-22 - Feedback Refinement: Contrast, Surface, Separators, Icons
+
+Files changed:
+
+- `wiki.css`
+- `preview.html`
+- `HANDOFF.md`
+
+Completed:
+
+- Addressed customer feedback from the Confluence Wiki screenshot review.
+- Changed the top Create/primary button treatment so blue buttons use white foreground
+  text and icons, including the nav-header primary button case.
+- Aligned the main content area background with the left navigation surface by using a
+  white application/main surface.
+- Strengthened key separator colors for the app bar bottom border, drawer right border,
+  drawer dividers, and table/content borders through the updated border tokens.
+- Increased and normalized icon color/size treatment for real Wiki.js/Vuetify
+  `.v-icon` usage in the app bar, navigation drawer, and floating action buttons.
+- Replaced preview-only black character icons for search, page icons, expand triangle,
+  and dropdown arrow with CSS-drawn local preview helper icons.
+- Clarified the icon boundary: the CSS rules for `.v-icon` can affect real Wiki.js
+  icons, while `.preview-icon`, `.preview-chevron`, and `.preview-search-icon` only
+  affect `preview.html` and must not be copied as Wiki.js runtime markup.
+
+Convergence checks:
+
+- Create button blue background with white foreground: Passed in desktop preview.
+- Content area and left navigation share the same white surface: Passed.
+- Separator lines are visibly stronger but still restrained: Passed.
+- Icons are larger and use a calmer Confluence-like icon color: Passed.
+- Preview no longer uses the old black character triangle/dropdown/search/page glyphs:
+  Passed.
+- Deliverables remain Wiki.js custom CSS plus local validation preview only: Passed.
+
+Verification:
+
+- Confirmed preview server is still listening on `127.0.0.1:4173`.
+- Requested `http://127.0.0.1:4173/preview.html`: HTTP 200, length 14310.
+- Requested `http://127.0.0.1:4173/wiki.css`: HTTP 200, length 19752.
+- Regenerated Chrome headless screenshots:
+  - `verification/preview-desktop.png`
+  - `verification/preview-mobile.png`
+- Manually inspected screenshots for button contrast, white surfaces, stronger
+  separators, and refined preview icons.
+- Checked mobile viewport layout through Chrome DevTools Protocol: document
+  `scrollWidth` matched `clientWidth`; the wide table scroll remained contained inside
+  `.table-responsive`.
+- Sub-agent `Mencius` performed a read-only feedback coverage review and recommended
+  committing after this handoff entry.
+
+Known risks:
+
+- `preview.html` remains a representative mock DOM; final icon behavior should still be
+  checked once `wiki.css` is applied to a live Wiki.js instance.
+- Broad `.v-icon` sizing/color rules are intentional for the visual feedback, but real
+  Wiki.js pages may reveal isolated icon cases that need narrower follow-up selectors.
+
 ## Active Notes
 
 - `wiki.css` must be treated as a selector map, not a design source.

@@ -1,5 +1,5 @@
 #root .v-application {
-  --wiki-bg: #f7f8f9;
+  --wiki-bg: #ffffff;
   --wiki-surface: #ffffff;
   --wiki-surface-subtle: #f1f2f4;
   --wiki-surface-hover: #f4f5f7;
@@ -8,8 +8,9 @@
   --wiki-text-inverse: #ffffff;
   --wiki-heading: #172b4d;
   --wiki-muted: #6b6e76;
-  --wiki-border: #dcdfe4;
-  --wiki-border-subtle: #ebecf0;
+  --wiki-icon: #44546f;
+  --wiki-border: #c7ced8;
+  --wiki-border-subtle: #d7dce3;
   --wiki-primary: #1868db;
   --wiki-primary-hover: #0c66e4;
   --wiki-primary-active: #1558bc;
@@ -108,8 +109,14 @@
   color: var(--wiki-text-inverse) !important;
 }
 
+#root .v-application .v-icon {
+  color: var(--wiki-icon);
+  font-size: 18px;
+  line-height: 1;
+}
+
 #root .v-application .v-main {
-  background-color: var(--wiki-bg) !important;
+  background-color: var(--wiki-surface) !important;
 }
 
 #root .v-application .v-card,
@@ -143,7 +150,7 @@
 #root .v-application .nav-header .v-toolbar.v-sheet,
 #root .v-application .nav-header.v-app-bar.v-app-bar {
   background-color: var(--wiki-surface) !important;
-  border-bottom: 1px solid var(--wiki-border-subtle);
+  border-bottom: 1px solid var(--wiki-border);
   box-shadow: var(--wiki-shadow-raised) !important;
   color: var(--wiki-heading) !important;
 }
@@ -153,6 +160,22 @@
 #root .v-application .nav-header .v-toolbar__title,
 #root .v-application .nav-header .v-toolbar__title .subheading {
   color: var(--wiki-heading) !important;
+}
+
+#root .v-application .nav-header .v-icon {
+  font-size: 20px;
+}
+
+#root .v-application .nav-header .v-btn.primary,
+#root .v-application .nav-header .v-btn.primary .v-btn__content,
+#root .v-application .nav-header .v-btn.primary .v-icon,
+#root .v-application .nav-header .v-btn.blue.darken-2,
+#root .v-application .nav-header .v-btn.blue.darken-2 .v-btn__content,
+#root .v-application .nav-header .v-btn.blue.darken-2 .v-icon,
+#root .v-application .nav-header .v-btn.deep-purple,
+#root .v-application .nav-header .v-btn.deep-purple .v-btn__content,
+#root .v-application .nav-header .v-btn.deep-purple .v-icon {
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .nav-header .v-toolbar.v-sheet .v-input__slot,
@@ -186,7 +209,7 @@
 }
 
 #root .v-application .v-navigation-drawer {
-  border-right: 1px solid var(--wiki-border-subtle) !important;
+  border-right: 1px solid var(--wiki-border) !important;
   box-shadow: none !important;
 }
 
@@ -208,6 +231,15 @@
 #root .v-application .v-navigation-drawer .v-subheader,
 #root .v-application .v-navigation-drawer .v-list-item__subtitle {
   color: var(--wiki-muted) !important;
+}
+
+#root .v-application .v-navigation-drawer .v-icon,
+#root .v-application .v-navigation-drawer .v-list-group__header__append-icon,
+#root .v-application .v-navigation-drawer .v-list-group__header__prepend-icon {
+  color: var(--wiki-icon) !important;
+  font-size: 18px;
+  min-width: 20px;
+  opacity: 0.95;
 }
 
 #root .v-application .v-navigation-drawer .v-list-item,
@@ -244,8 +276,8 @@
 }
 
 #root .v-application .v-navigation-drawer .v-divider {
-  border-color: var(--wiki-border-subtle) !important;
-  background-color: var(--wiki-border-subtle) !important;
+  border-color: var(--wiki-border) !important;
+  background-color: var(--wiki-border) !important;
 }
 
 #root .v-application .v-navigation-drawer .__bar-wrap-is-vertical .__bar-is-vertical {
@@ -575,6 +607,10 @@
 #root .v-application .v-speed-dial .v-btn.v-btn--fab .v-icon,
 #root .v-application .v-speed-dial .v-btn.v-btn--fab .v-btn__content {
   color: var(--wiki-text-inverse) !important;
+}
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab .v-icon {
+  font-size: 20px;
 }
 
 #root .v-application.theme--dark {
