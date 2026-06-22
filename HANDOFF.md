@@ -23,8 +23,8 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | T0 | Project Setup And Baseline | Completed |
 | T1 | Selector Audit | Completed |
 | T2 | Theme Foundation | Completed |
-| T3 | Global Layout And Shell | Pending |
-| T4 | Article Typography | Pending |
+| T3 | Global Layout And Shell | Completed |
+| T4 | Article Typography | Completed |
 | T5 | Rich Content Components | Pending |
 | T6 | Floating Actions And Common Controls | Pending |
 | T7 | Local Preview Implementation | Pending |
@@ -469,6 +469,105 @@ Known risks:
   Wiki.js override, not an exact Atlassian product clone.
 - Font stack does not import or depend on proprietary Atlassian fonts; it uses local
   availability and open/system fallbacks.
+
+### 2026-06-22 - T3/T4 Global Shell And Article Typography
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Completed:
+
+- Rewrote `wiki.css` from the old teal theme into a Confluence-like CSS override
+  foundation.
+- Added T2 design tokens as CSS custom properties scoped to `#root .v-application`.
+- Styled global app surface, primary Vuetify color hooks, app bar, search field,
+  navigation drawer, active nav states, page header, footer links, and dark-mode token
+  overrides.
+- Implemented article typography for `.v-main .contents`, including heading scale,
+  body text, lists, links, horizontal rules, and responsive heading adjustment.
+- Removed old teal palette, forced uppercase/capitalize heading behavior, decorative
+  gradients, dark brand header identity, teal code background, and dashed teal link
+  hover treatment.
+- Added baseline compatibility cleanup for inline code, code blocks, blockquotes,
+  tables, editor toolbar, and FAB colors so old visual identity does not leak forward.
+  These are not considered final T5/T6 rich-component polish.
+
+Implemented selector areas:
+
+- Global app:
+  - `#root .v-application`
+  - `.primary`, `.primary--text`, `.blue.darken-2`, `.blue.darken-3`, `.deep-purple`
+  - `.v-main`, `.v-card`, `.v-sheet`
+- App bar / search:
+  - `.v-toolbar__title .subheading`
+  - `.nav-header .v-toolbar.v-sheet`
+  - `.nav-header.v-app-bar.v-app-bar`
+  - `.nav-header .v-input__slot`
+  - `.nav-header .v-input--is-focused .v-input__slot`
+  - `.nav-header input`, `.nav-header .v-label`
+- Navigation drawer:
+  - `.v-navigation-drawer`
+  - `.v-list.primary`, `.v-navigation-drawer__content`, `.v-sheet`
+  - `.v-list-item`, `.v-list-item--active`, `.v-list-item:hover`
+  - `.v-list-group__header`, `.v-subheader`, `.v-divider`
+  - Drawer button/icon/title/subtitle selectors
+- Page header:
+  - `.page-header-section`
+  - `.page-header-section .headline`
+  - `.page-header-section .caption`
+- Article typography:
+  - `.v-main .contents`
+  - `.contents p`, `ul`, `ol`, `li`, `hr`
+  - `.contents h1` through `h5`
+  - `.contents h1:first-child`
+  - `.contents h1::after` through `h5::after`
+  - `.contents a`, hover/focus, and focus-visible states
+
+T3 convergence checks:
+
+- Clean white/light-gray surfaces are used: Passed.
+- Borders and shadows are restrained: Passed.
+- Atlassian-like blue active states are visible: Passed.
+- Left navigation hierarchy is clear: Passed.
+- Search and app bar styling fit the Confluence-like direction: Passed.
+- Responsive behavior has basic CSS support through media query: Passed.
+- All styling remains expressible as Wiki.js custom CSS selectors/declarations: Passed.
+
+T4 convergence checks:
+
+- Headings are not uppercase: Passed.
+- Heading hierarchy, spacing, and body text line-height are clear: Passed.
+- Paragraphs, lists, links, metadata, dividers, and blockquotes have readable contrast:
+  Passed.
+- Link and hover treatment uses the selected Atlassian-like blue direction: Passed.
+- Content remains comfortable for long technical articles through `max-width: 920px`
+  and `line-height: 1.62`: Passed.
+
+Verification:
+
+- Sub-agent `Ramanujan` provided a read-only T3/T4 preflight checklist.
+- Ran grep checks against `wiki.css` for old colors and patterns:
+  - `#70c7ba`, `#42a999`, `#4bb9a8`, `#3b9689`, `#49eacb`, `#a4f5e5`,
+    `#108a73`, `#70C7BA`, `#231f20`: no matches.
+  - `uppercase`, `capitalize`, `letter-spacing:\s*1px`, `border-image`,
+    `linear-gradient`, `dashed`: no matches.
+  - `theme package`, `plugin`, `build`, `database`, `migration`, `admin screen`,
+    `configuration interface`: no matches in `wiki.css`.
+- Checked CSS brace balance: `opens=65 closes=65`.
+- Confirmed expected selector coverage with `rg` for nav/header/drawer/content
+  selectors.
+
+Known risks:
+
+- `.primary`, `.primary--text`, `.blue.darken-2`, `.blue.darken-3`, and `.deep-purple`
+  remain broad Vuetify utility hooks; they are mapped to the new blue tokens for
+  compatibility but should be watched in real Wiki.js testing.
+- `.v-input__slot`, `.v-list-group__header__*`, and scrollbar selectors are
+  Vuetify/internal or implementation-sensitive selectors.
+- T5/T6 still need dedicated polish for rich content components, callouts, tables,
+  code blocks, editor toolbar, buttons, and floating actions.
 
 ## Active Notes
 

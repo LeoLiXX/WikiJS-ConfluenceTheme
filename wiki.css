@@ -1,53 +1,128 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
-#root .v-application .editor-markdown .editor-markdown-toolbar {
-  background-image: linear-gradient(180deg,#70c7ba,#42a999)
-}
 #root .v-application {
-  font: normal normal 16px "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+  --wiki-bg: #f7f8f9;
+  --wiki-surface: #ffffff;
+  --wiki-surface-subtle: #f1f2f4;
+  --wiki-surface-hover: #f4f5f7;
+  --wiki-surface-active: #e9f2ff;
+  --wiki-text: #292a2e;
+  --wiki-heading: #172b4d;
+  --wiki-muted: #6b6e76;
+  --wiki-border: #dcdfe4;
+  --wiki-border-subtle: #ebecf0;
+  --wiki-primary: #1868db;
+  --wiki-primary-hover: #0c66e4;
+  --wiki-primary-active: #1558bc;
+  --wiki-focus: #388bff;
+  --wiki-code-bg: #f1f2f4;
+  --wiki-code-text: #172b4d;
+  --wiki-table-head-bg: #f7f8f9;
+  --wiki-info-bg: #e9f2ff;
+  --wiki-info-border: #1d7afc;
+  --wiki-success-bg: #dcfff1;
+  --wiki-success-border: #22a06b;
+  --wiki-warning-bg: #fff7d6;
+  --wiki-warning-border: #f5cd47;
+  --wiki-danger-bg: #ffeceb;
+  --wiki-danger-border: #e34935;
+  --wiki-radius-sm: 3px;
+  --wiki-radius: 6px;
+  --wiki-shadow-raised: 0 1px 2px rgba(9, 30, 66, 0.16);
+  --wiki-shadow-overlay: 0 8px 16px rgba(9, 30, 66, 0.15);
+  --wiki-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei",
+    "PingFang SC", "Noto Sans CJK SC", "Noto Sans", sans-serif;
+  --wiki-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+    monospace;
+  background-color: var(--wiki-bg) !important;
+  color: var(--wiki-text);
+  font-family: var(--wiki-font);
+  font-size: 15px;
+  line-height: 1.6;
 }
-#root .v-application .primary {
-  background-color: #70c7ba!important;
-  border-color: #70c7ba!important
+
+#root .v-application .primary,
+#root .v-application .blue.darken-2,
+#root .v-application .deep-purple {
+  background-color: var(--wiki-primary) !important;
+  border-color: var(--wiki-primary) !important;
 }
+
+#root .v-application .blue.darken-3 {
+  background-color: var(--wiki-primary-active) !important;
+  border-color: var(--wiki-primary-active) !important;
+}
+
 #root .v-application .primary--text {
-  color: #70c7ba!important;
-  caret-color: #70C7BA!important
+  color: var(--wiki-primary) !important;
+  caret-color: var(--wiki-primary) !important;
 }
+
+#root .v-application .v-main {
+  background-color: var(--wiki-bg) !important;
+}
+
+#root .v-application .v-card,
+#root .v-application .v-sheet {
+  border-color: var(--wiki-border-subtle);
+}
+
 #root .v-application .v-toolbar__title .subheading {
-  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
-  font-weight: 700;
-  letter-spacing: 1px
+  color: var(--wiki-heading);
+  font-family: var(--wiki-font);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
+
 #root .v-application .nav-header .v-toolbar.v-sheet,
 #root .v-application .nav-header.v-app-bar.v-app-bar {
-  background-color: #231f20!important
+  background-color: var(--wiki-surface) !important;
+  border-bottom: 1px solid var(--wiki-border-subtle);
+  box-shadow: var(--wiki-shadow-raised) !important;
+  color: var(--wiki-heading) !important;
 }
+
+#root .v-application .nav-header .v-btn,
+#root .v-application .nav-header .v-icon,
+#root .v-application .nav-header .v-toolbar__title,
+#root .v-application .nav-header .v-toolbar__title .subheading {
+  color: var(--wiki-heading) !important;
+}
+
 #root .v-application .nav-header .v-toolbar.v-sheet .v-input__slot,
 #root .v-application .nav-header.v-app-bar.v-app-bar .v-input__slot {
-  background-color: #000
+  background-color: var(--wiki-surface-subtle) !important;
+  border: 1px solid transparent;
+  border-radius: var(--wiki-radius);
+  box-shadow: none !important;
+  color: var(--wiki-text) !important;
+  transition: background-color 120ms ease, border-color 120ms ease,
+    box-shadow 120ms ease;
 }
-#root .v-application .blue.darken-2 {
-  background-color: #4bb9a8!important
+
+#root .v-application .nav-header .v-toolbar.v-sheet .v-input--is-focused .v-input__slot,
+#root .v-application .nav-header.v-app-bar.v-app-bar .v-input--is-focused .v-input__slot {
+  background-color: var(--wiki-surface) !important;
+  border-color: var(--wiki-focus);
+  box-shadow: 0 0 0 2px rgba(56, 139, 255, 0.18) !important;
 }
-#root .v-application .blue.darken-3 {
-  background-color: #3b9689!important
+
+#root .v-application .nav-header input,
+#root .v-application .nav-header .v-label {
+  color: var(--wiki-text) !important;
 }
-#root .v-application .deep-purple {
-  background-color: #3b9689!important;
-  border-color: #3b9689!important
-}
-#root .v-application .v-navigation-drawer .__bar-wrap-is-vertical .__bar-is-vertical {
-  background-color: #70c7ba!important
-}
-#root .v-application .v-navigation-drawer .v-list.primary {
-  background-color: #231f20!important
-}
+
 #root .v-application .v-navigation-drawer,
 #root .v-application .v-navigation-drawer .v-list.primary,
 #root .v-application .v-navigation-drawer .v-navigation-drawer__content,
 #root .v-application .v-navigation-drawer .v-sheet {
-  background-color: #fff!important
+  background-color: var(--wiki-surface) !important;
 }
+
+#root .v-application .v-navigation-drawer {
+  border-right: 1px solid var(--wiki-border-subtle) !important;
+  box-shadow: none !important;
+}
+
 #root .v-application .v-navigation-drawer,
 #root .v-application .v-navigation-drawer .v-icon,
 #root .v-application .v-navigation-drawer .v-list-group__header,
@@ -59,216 +134,337 @@
 #root .v-application .v-navigation-drawer .v-list-item__title,
 #root .v-application .v-navigation-drawer .v-list.primary,
 #root .v-application .v-navigation-drawer .v-subheader {
-  color: #111!important;
-  caret-color: #111!important
+  color: var(--wiki-text) !important;
+  caret-color: var(--wiki-text) !important;
 }
+
+#root .v-application .v-navigation-drawer .v-subheader,
+#root .v-application .v-navigation-drawer .v-list-item__subtitle {
+  color: var(--wiki-muted) !important;
+}
+
+#root .v-application .v-navigation-drawer .v-list-item,
+#root .v-application .v-navigation-drawer .v-list-group__header {
+  border-radius: var(--wiki-radius);
+  margin: 2px 8px;
+  min-height: 36px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+#root .v-application .v-navigation-drawer .v-list-item:hover,
+#root .v-application .v-navigation-drawer .v-list-group__header:hover {
+  background-color: var(--wiki-surface-hover) !important;
+  color: var(--wiki-heading) !important;
+}
+
+#root .v-application .v-navigation-drawer .v-list-item--active,
+#root .v-application .v-navigation-drawer .v-list-item--active:hover {
+  background-color: var(--wiki-surface-active) !important;
+  color: var(--wiki-primary) !important;
+  font-weight: 600;
+}
+
+#root .v-application .v-navigation-drawer .v-list-item--active .v-icon,
+#root .v-application .v-navigation-drawer .v-list-item--active .v-list-item__title,
+#root .v-application .v-navigation-drawer .v-list-item--active .v-list-item__subtitle {
+  color: var(--wiki-primary) !important;
+}
+
+#root .v-application .v-navigation-drawer .v-list-item--active::before,
+#root .v-application .v-navigation-drawer .v-list-item--active:hover::before,
+#root .v-application .v-navigation-drawer .v-list-item:hover::before {
+  opacity: 0 !important;
+}
+
+#root .v-application .v-navigation-drawer .v-divider {
+  border-color: var(--wiki-border-subtle) !important;
+  background-color: var(--wiki-border-subtle) !important;
+}
+
+#root .v-application .v-navigation-drawer .__bar-wrap-is-vertical .__bar-is-vertical {
+  background-color: var(--wiki-border) !important;
+}
+
 #root .v-application .v-navigation-drawer .v-btn,
 #root .v-application .v-navigation-drawer .v-btn.blue,
 #root .v-application .v-navigation-drawer .v-btn.darken-2,
 #root .v-application .v-navigation-drawer .v-btn.darken-3,
 #root .v-application .v-navigation-drawer .v-btn.primary {
-  background-color: #fff!important;
-  border-color: #fff!important;
-  box-shadow: none!important;
-  color: #111!important
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--wiki-text) !important;
 }
+
+#root .v-application .v-navigation-drawer .v-btn:hover {
+  background-color: var(--wiki-surface-hover) !important;
+}
+
 #root .v-application .v-navigation-drawer .v-btn .v-btn__content,
 #root .v-application .v-navigation-drawer .v-btn .v-icon {
-  color: #111!important;
-  caret-color: #111!important
+  color: inherit !important;
+  caret-color: inherit !important;
 }
-#root .v-application .v-navigation-drawer .v-divider {
-  border-color: #d0d0d0!important;
-  background-color: #d0d0d0!important
+
+#root .v-application .page-header-section {
+  color: var(--wiki-text);
 }
-#root .v-application .v-navigation-drawer .v-list-item--active,
-#root .v-application .v-navigation-drawer .v-list-item--active:hover,
-#root .v-application .v-navigation-drawer .v-list-item:hover {
-  background-color: #d6d6d6!important;
-  color: #111!important
-}
-#root .v-application .v-navigation-drawer .v-list-item--active::before,
-#root .v-application .v-navigation-drawer .v-list-item--active:hover::before,
-#root .v-application .v-navigation-drawer .v-list-item:hover::before {
-  opacity: 0!important
-}
-#root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit {
-  background-color: #70c7ba!important
-}
-#root .v-application .v-speed-dial .v-btn.v-btn--fab.red {
-  background-color: #dd2e44!important
-}
+
 #root .v-application .page-header-section .headline {
-  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #231f20
+  color: var(--wiki-heading);
+  font-family: var(--wiki-font);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 40px;
+  text-transform: none;
 }
+
 #root .v-application .page-header-section .caption {
-  color: #909090!important
+  color: var(--wiki-muted) !important;
+  font-size: 13px;
+  letter-spacing: 0;
 }
+
+#root .v-application .v-main .contents {
+  color: var(--wiki-text);
+  font-family: var(--wiki-font);
+  font-size: 15px;
+  line-height: 1.62;
+  max-width: 920px;
+}
+
+#root .v-application .v-main .contents p,
+#root .v-application .v-main .contents li {
+  color: var(--wiki-text);
+  line-height: 1.62;
+}
+
+#root .v-application .v-main .contents p {
+  margin-bottom: 14px;
+}
+
+#root .v-application .v-main .contents ul,
+#root .v-application .v-main .contents ol {
+  margin: 0 0 16px 1.35rem;
+  padding-left: 0.75rem;
+}
+
+#root .v-application .v-main .contents li + li {
+  margin-top: 4px;
+}
+
 #root .v-application .v-main .contents h1,
 #root .v-application .v-main .contents h2,
 #root .v-application .v-main .contents h3,
 #root .v-application .v-main .contents h4,
 #root .v-application .v-main .contents h5 {
-  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #231f20;
-  margin-top: 2rem
+  color: var(--wiki-heading);
+  font-family: var(--wiki-font);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
+
 #root .v-application .v-main .contents h1::after,
 #root .v-application .v-main .contents h2::after,
 #root .v-application .v-main .contents h3::after,
 #root .v-application .v-main .contents h4::after,
 #root .v-application .v-main .contents h5::after {
-  display: none
+  display: none;
 }
+
 #root .v-application .v-main .contents h1 {
-  color: #70c7ba;
-  margin-top: 3.5rem
+  font-size: 32px;
+  line-height: 40px;
+  margin: 0 0 20px;
 }
+
 #root .v-application .v-main .contents h1:first-child {
-  margin-top: 0
+  margin-top: 0;
 }
+
 #root .v-application .v-main .contents h2 {
-  margin-top: 3rem;
-  font-size: 1.5rem;
-  border-width: 0;
-  border-bottom-width: .125rem;
-  border-style: solid;
-  border-image: linear-gradient(to right,#70C7BA,rgba(255,255,255,0)) 0 0 1 0
+  border-bottom: 1px solid var(--wiki-border-subtle);
+  font-size: 24px;
+  line-height: 32px;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
 }
+
 #root .v-application .v-main .contents h3 {
-  font-size: 1.125rem;
-  color: #6a6a6a;
-  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
-  text-transform: capitalize
+  font-size: 20px;
+  line-height: 28px;
+  margin: 28px 0 12px;
 }
+
 #root .v-application .v-main .contents h4 {
-  font-size: 1.125rem;
-  color: #b6b6b6
+  font-size: 16px;
+  line-height: 24px;
+  margin: 24px 0 10px;
 }
+
 #root .v-application .v-main .contents h5 {
-  font-size: 1rem;
-  font-style: normal;
-  color: #b6b6b6
+  color: var(--wiki-muted);
+  font-size: 14px;
+  line-height: 20px;
+  margin: 20px 0 8px;
 }
-#root .v-application .v-main .contents a {
-  font-weight: 600;
+
+#root .v-application .v-main .contents a,
+#root .v-application .v-footer a {
+  color: var(--wiki-primary);
+  font-weight: 500;
   text-decoration: none;
-  color: #4bb9a8;
-  transition-property: color;
-  transition-duration: .5s
+  transition: color 120ms ease, text-decoration-color 120ms ease;
 }
+
 #root .v-application .v-main .contents a:focus,
-#root .v-application .v-main .contents a:hover {
-  color: #231f20;
-  border-bottom: 1px #49eacb dashed
+#root .v-application .v-main .contents a:hover,
+#root .v-application .v-footer a:focus,
+#root .v-application .v-footer a:hover {
+  color: var(--wiki-primary-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
+
+#root .v-application .v-main .contents a:focus-visible,
+#root .v-application .v-footer a:focus-visible,
+#root .v-application .v-btn:focus-visible {
+  border-radius: var(--wiki-radius-sm);
+  outline: 2px solid var(--wiki-focus);
+  outline-offset: 2px;
+}
+
+#root .v-application .v-main .contents hr {
+  border: 0;
+  border-top: 1px solid var(--wiki-border-subtle);
+  margin: 24px 0;
+}
+
 #root .v-application .v-main .contents code {
-  background-color: #49eacb;
-  color: #231f20
+  background-color: var(--wiki-code-bg);
+  border-radius: var(--wiki-radius-sm);
+  color: var(--wiki-code-text);
+  font-family: var(--wiki-mono);
+  font-size: 0.92em;
+  padding: 0.12em 0.34em;
 }
+
 #root .v-application .v-main .contents .prismjs code {
   background-color: transparent;
-  color: #fff
+  color: inherit;
+  padding: 0;
 }
+
 #root .v-application .v-main .contents blockquote {
-  border-left-color: #231f20
+  background-color: var(--wiki-surface-subtle);
+  border-left: 4px solid var(--wiki-border);
+  border-radius: var(--wiki-radius);
+  color: var(--wiki-text);
+  margin: 16px 0;
+  padding: 12px 16px;
 }
+
 #root .v-application .v-main .contents blockquote.is-info {
-  color: #231f20;
-  border-left-color: #70c7ba
+  background-color: var(--wiki-info-bg);
+  border-left-color: var(--wiki-info-border);
 }
-#root .v-application .v-main .contents blockquote.is-info::before {
-  color: #fff
-}
+
 #root .v-application .v-main .contents blockquote.is-warning {
-  border-left-color: #daa039
+  background-color: var(--wiki-warning-bg);
+  border-left-color: var(--wiki-warning-border);
 }
-#root .v-application .v-main .contents blockquote.is-warning::before {
-  color: #fff
-}
+
 #root .v-application .v-main .contents blockquote.is-danger {
-  border-left-color: #dd2e44
+  background-color: var(--wiki-danger-bg);
+  border-left-color: var(--wiki-danger-border);
 }
-#root .v-application .v-main .contents blockquote.is-danger::before {
-  color: #fff
-}
+
 #root .v-application .v-main .contents blockquote.is-success {
-  border-left-color: #49eacb;
-  background-color: #a4f5e5;
-  color: #108a73
+  background-color: var(--wiki-success-bg);
+  border-left-color: var(--wiki-success-border);
 }
+
+#root .v-application .v-main .contents blockquote::before,
+#root .v-application .v-main .contents blockquote.is-info::before,
+#root .v-application .v-main .contents blockquote.is-warning::before,
+#root .v-application .v-main .contents blockquote.is-danger::before,
 #root .v-application .v-main .contents blockquote.is-success::before {
-  color: #fff
+  color: var(--wiki-heading);
 }
-#root .v-application .v-footer a {
-  text-decoration: none;
-  color: #4bb9a8
+
+#root .v-application .v-main .contents table {
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  width: 100%;
 }
-#root .v-application.theme--dark .v-main .contents h2 {
-  color: #77efd8
+
+#root .v-application .v-main .contents th,
+#root .v-application .v-main .contents td {
+  border: 1px solid var(--wiki-border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
 }
-#root .v-application.theme--dark .v-main .contents h3 {
-  color: #a4f5e5
+
+#root .v-application .v-main .contents th {
+  background-color: var(--wiki-table-head-bg);
+  color: var(--wiki-heading);
+  font-weight: 600;
 }
-#root .v-application.theme--dark .v-main .contents h4 {
-  color: #fff
+
+#root .v-application .editor-markdown .editor-markdown-toolbar {
+  background-color: var(--wiki-surface) !important;
+  border-bottom: 1px solid var(--wiki-border-subtle);
+  box-shadow: none;
 }
-#root .v-application.theme--dark .v-main .contents h5 {
-  color: #fff
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit {
+  background-color: var(--wiki-primary) !important;
+  border-color: var(--wiki-primary) !important;
+  color: var(--wiki-surface) !important;
 }
-#root .v-application.theme--dark .v-main .contents a {
-  color: #70c7ba
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab.red {
+  background-color: var(--wiki-danger-border) !important;
+  border-color: var(--wiki-danger-border) !important;
 }
-#root .v-application.theme--dark .v-main .contents a:focus,
-#root .v-application.theme--dark .v-main .contents a:hover {
-  color: #fff
+
+#root .v-application.theme--dark {
+  --wiki-bg: #1d2125;
+  --wiki-surface: #22272b;
+  --wiki-surface-subtle: #2c333a;
+  --wiki-surface-hover: #303940;
+  --wiki-surface-active: #0c2a4d;
+  --wiki-text: #dee4ea;
+  --wiki-heading: #f1f2f4;
+  --wiki-muted: #9fadbc;
+  --wiki-border: #454f59;
+  --wiki-border-subtle: #38414a;
+  --wiki-code-bg: #2c333a;
+  --wiki-code-text: #f1f2f4;
+  --wiki-table-head-bg: #2c333a;
+  --wiki-info-bg: #092957;
+  --wiki-success-bg: #123c2b;
+  --wiki-warning-bg: #4a3511;
+  --wiki-danger-bg: #4f1c16;
 }
-#root .v-application.theme--dark .v-main .contents blockquote {
-  background-color: #282425;
-  border-left-color: #b6b6b6;
-  color: #fff
-}
-#root .v-application.theme--dark .v-main .contents blockquote::before {
-  color: #231f20
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-info {
-  background-color: #102825;
-  color: #fff;
-  border-left-color: #70c7ba
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-info::before {
-  color: #fff
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-warning {
-  background-color: #674913;
-  border-left-color: #bd8523
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-warning::before {
-  color: #fff
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-danger {
-  background-color: #62101a;
-  border-left-color: #ba1e32
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-danger::before {
-  color: #fff
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-success {
-  border-left-color: #70c7ba;
-  background-color: #3b9689;
-  color: #fff
-}
-#root .v-application.theme--dark .v-main .contents blockquote.is-success::before {
-  color: #fff
-}
+
 #root .v-application.theme--dark .v-footer {
-  opacity: .75
+  opacity: 0.9;
+}
+
+@media (max-width: 960px) {
+  #root .v-application .page-header-section .headline,
+  #root .v-application .v-main .contents h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  #root .v-application .v-main .contents {
+    font-size: 14px;
+    max-width: 100%;
+  }
 }
