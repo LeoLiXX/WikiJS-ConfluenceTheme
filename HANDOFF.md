@@ -11,6 +11,7 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 
 - Local Git repository initialized.
 - Baseline commit: `f379a94 chore: initialize wiki theme baseline`.
+- Workflow checkpoint commit: `c1c5705 docs: add agent workflow and css boundary`.
 - Baseline files:
   - `Requirement.md`
   - `wiki.css`
@@ -20,7 +21,7 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | Task | Title | Status |
 | --- | --- | --- |
 | T0 | Project Setup And Baseline | Completed |
-| T1 | Selector Audit | Pending |
+| T1 | Selector Audit | Completed |
 | T2 | Theme Foundation | Pending |
 | T3 | Global Layout And Shell | Pending |
 | T4 | Article Typography | Pending |
@@ -163,6 +164,154 @@ Known risks:
 
 - Future implementation should verify real Wiki.js custom CSS behavior from local
   evidence or official documentation if uncertainty arises.
+
+### 2026-06-22 - T1 Selector Audit
+
+Files changed:
+
+- `HANDOFF.md`
+
+Completed:
+
+- Delegated selector audit to sub-agent `Lorentz`.
+- Reviewed `wiki.css` strictly as a Wiki.js/Vuetify selector map.
+- Grouped selectors for global app, app bar/search, navigation drawer, article
+  content, links, code, callouts, buttons/FABs, editor toolbar, footer, and dark mode.
+- Identified broad Vuetify utility overrides and internal Vuetify/Wiki.js selectors as
+  version-sensitive risks.
+- Confirmed old teal palette, uppercase headings, decorative gradients, and current
+  visual decisions must not be carried into the redesign.
+
+Selector groups:
+
+- Global app:
+  - `#root .v-application`
+  - `.primary`, `.primary--text`, `.blue.darken-2`, `.blue.darken-3`, `.deep-purple`
+- App bar / top nav / search:
+  - `.v-toolbar__title .subheading`
+  - `.nav-header .v-toolbar.v-sheet`
+  - `.nav-header.v-app-bar.v-app-bar`
+  - `.nav-header ... .v-input__slot`
+- Navigation drawer:
+  - `.v-navigation-drawer`
+  - `.v-list.primary`, `.v-navigation-drawer__content`, `.v-sheet`
+  - `.v-icon`, `.v-list-group__header*`, `.v-list-item*`, `.v-subheader`
+  - `.v-btn*`, `.v-divider`, `.v-list-item--active`, `.v-list-item:hover`
+  - `.v-list-item--active::before`
+  - `.__bar-wrap-is-vertical .__bar-is-vertical`
+- Main content / article typography:
+  - `.page-header-section .headline`
+  - `.page-header-section .caption`
+  - `.v-main .contents h1` through `h5`
+  - `.v-main .contents h1:first-child`
+  - `.v-main .contents h1::after` through `h5::after`
+- Links / lists / tables:
+  - `.v-main .contents a`, `a:hover`, `a:focus`
+  - No explicit list selectors found in old `wiki.css`.
+  - No explicit table selectors found in old `wiki.css`.
+  - Later tasks should cover `.contents ul`, `.contents ol`, `.contents li`,
+    `.contents table`, `.contents th`, and `.contents td` based on rendered Wiki.js
+    content assumptions.
+- Inline code / code blocks:
+  - `.v-main .contents code`
+  - `.v-main .contents .prismjs code`
+- Blockquotes / callouts / admonitions:
+  - `.v-main .contents blockquote`
+  - `blockquote.is-info`, `blockquote.is-warning`, `blockquote.is-danger`,
+    `blockquote.is-success`
+  - Matching `::before` selectors for each callout state
+- Buttons / FAB / action controls:
+  - `.v-navigation-drawer .v-btn`
+  - `.v-navigation-drawer .v-btn.blue`
+  - `.v-navigation-drawer .v-btn.darken-2`
+  - `.v-navigation-drawer .v-btn.darken-3`
+  - `.v-navigation-drawer .v-btn.primary`
+  - `.v-navigation-drawer .v-btn .v-btn__content`
+  - `.v-navigation-drawer .v-btn .v-icon`
+  - `.v-speed-dial .v-btn.v-btn--fab.btn-animate-edit`
+  - `.v-speed-dial .v-btn.v-btn--fab.red`
+- Editor toolbar:
+  - `.editor-markdown .editor-markdown-toolbar`
+- Footer:
+  - `.v-footer a`
+  - `.theme--dark .v-footer`
+- Dark mode:
+  - `.theme--dark .v-main .contents h2` through `h5`
+  - `.theme--dark .v-main .contents a`, `a:hover`, `a:focus`
+  - `.theme--dark .v-main .contents blockquote`
+  - `.theme--dark .v-main .contents blockquote::before`
+  - `.theme--dark .v-main .contents blockquote.is-info`
+  - `.theme--dark .v-main .contents blockquote.is-warning`
+  - `.theme--dark .v-main .contents blockquote.is-danger`
+  - `.theme--dark .v-main .contents blockquote.is-success`
+
+Risky, global, or version-sensitive selectors:
+
+- `.primary`, `.primary--text`, `.blue.darken-2`, `.blue.darken-3`, `.deep-purple`
+  are broad Vuetify utility overrides and may affect unrelated controls.
+- `.v-input__slot` is a Vuetify internal structure and may be version-sensitive.
+- `.v-list-group__header__append-icon`, `__content`, and `__prepend-icon` are
+  Vuetify internal class names and may be version-sensitive.
+- `.__bar-wrap-is-vertical .__bar-is-vertical` appears to target custom scrollbar
+  internals and is high risk.
+- `.btn-animate-edit` appears Wiki.js-specific and should be verified against real DOM.
+- `.editor-markdown .editor-markdown-toolbar` is editor-only and may not appear in
+  read-only preview.
+- `.contents .prismjs code` assumes Prism wrapper markup.
+- `blockquote.is-info`, `.is-warning`, `.is-danger`, and `.is-success` assume Wiki.js
+  admonitions render as status blockquotes.
+- `#root .v-application` is likely correct for Wiki.js/Vuetify but tightly couples the
+  override to current root structure.
+
+DOM assumptions:
+
+- Wiki.js mounts under `#root` and uses Vuetify `.v-application`.
+- Top navigation uses `.nav-header`, `.v-app-bar`, `.v-toolbar`, and search/input
+  markup with `.v-input__slot`.
+- Left navigation uses `.v-navigation-drawer`, `.v-list`, `.v-list-item`,
+  `.v-list-group__header`, `.v-subheader`, `.v-divider`, and `.v-list-item--active`.
+- Article content renders under `.v-main .contents`.
+- Page title and metadata use `.page-header-section .headline` and `.caption`.
+- Code highlighting uses `.prismjs code`.
+- Callouts/admonitions are represented by `blockquote` plus status classes.
+- Floating actions use `.v-speed-dial`, `.v-btn--fab`, `.btn-animate-edit`, and `.red`.
+- Dark mode is signaled by `.v-application.theme--dark`.
+
+Must not carry forward:
+
+- Teal palette: `#70c7ba`, `#42a999`, `#4bb9a8`, `#3b9689`, `#49eacb`,
+  `#a4f5e5`, `#108a73`, and related dark teal variants.
+- Uppercase heading styling, including page title and content headings.
+- Capitalized heading styling as a theme feature on `h3`.
+- Decorative gradients, including editor toolbar gradient and `h2` gradient border.
+- Brand-like dominant dark header identity from `#231f20`.
+- Over-broad Vuetify utility color remapping as design tokens.
+- Bright teal inline code background.
+- Dashed teal link hover underline.
+- Old heading scale that gives `h1` through `h5` the same base style before overrides.
+
+Convergence checks:
+
+- Existing `wiki.css` reviewed only as selector map: Passed.
+- Key selectors identified for app bar, drawer, content, buttons, tables, code,
+  callouts, floating actions, and footer: Passed, with note that lists/tables are not
+  explicitly present in existing CSS and must be covered from rendered `.contents`
+  markup assumptions.
+- Selectors grouped by required areas: Passed.
+- Unsupported or uncertain selectors marked as risks: Passed.
+- No old teal, uppercase, or gradient visual decisions carried forward: Passed.
+
+Verification:
+
+- Sub-agent `Lorentz` read `Agent.md`, `Requirement.md`, `HANDOFF.md`, and `wiki.css`.
+- Main agent incorporated the audit into `HANDOFF.md`.
+
+Known risks:
+
+- Some selectors depend on Vuetify internals or Wiki.js rendered DOM conventions and
+  should be verified against a live Wiki.js instance or representative preview DOM.
+- No unsupported Wiki.js theme APIs, package formats, plugin mechanisms, build steps,
+  or configuration interfaces were assumed.
 
 ## Active Notes
 
