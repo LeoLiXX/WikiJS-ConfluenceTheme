@@ -34,8 +34,27 @@ The target is "Confluence-like", not an exact pixel-for-pixel clone.
 - Do not add heavy decorative gradients or brand-specific ornamental styling.
 - Do not modify Wiki.js source code unless CSS-only customization proves insufficient.
 - Do not attempt to copy Atlassian proprietary assets, logos, or exact branding.
+- Do not invent unsupported Wiki.js theme package formats, plugin APIs, build steps,
+  admin screens, or configuration interfaces.
+- Do not treat the local preview page as part of the Wiki.js runtime deliverable.
 
-## 4. Scope
+## 4. Wiki.js Custom CSS Boundary
+
+This project must stay within the Wiki.js custom CSS / CSS override boundary.
+
+Verified reference points:
+
+- Official Wiki.js site describes the supported customization surface as injecting or
+  overriding CSS/JS from the administration area: https://js.wiki/
+- Official Wiki.js developer theme documentation says custom themes are not fully
+  supported and describes developer-oriented bundle/database work:
+  https://docs.requarks.io/dev/themes
+
+Therefore the implementation deliverable is `wiki.css` as a CSS override plus local
+preview support. It is not a Wiki.js custom theme package, plugin, source-code patch,
+database migration, or build workflow.
+
+## 5. Scope
 
 First version should cover the common Wiki.js reading experience:
 
@@ -51,9 +70,9 @@ First version should cover the common Wiki.js reading experience:
 Dark mode may be supported if practical, but the primary acceptance target is the
 light Confluence-like documentation experience.
 
-## 5. Design Direction
+## 6. Design Direction
 
-### 5.1 Color
+### 6.1 Color
 
 Recommended palette:
 
@@ -66,35 +85,36 @@ Recommended palette:
 - Code: light neutral background with readable monospace text.
 - Status colors: restrained info, warning, success, and danger variants.
 
-### 5.2 Typography
+### 6.2 Typography
 
 - Keep a modern sans-serif stack with Chinese fallback.
 - Avoid all-caps headings.
 - Use clear heading hierarchy with modest spacing.
 - Body text should prioritize long-form readability.
 
-### 5.3 Layout Feel
+### 6.3 Layout Feel
 
 - Documentation-first layout.
 - Left navigation should feel like Confluence space/page navigation.
 - Content area should be calm, readable, and not overly branded.
 - UI should be dense enough for work use, without looking crowded.
 
-## 6. Implementation Plan
+## 7. Implementation Plan
 
 1. Treat existing `wiki.css` as a selector map and implementation reference only.
 2. Replace the current visual language with a Confluence-like design system.
-3. Keep the implementation CSS-only where possible.
+3. Keep the implementation strictly aligned with Wiki.js custom CSS usage.
 4. Add a local preview page that simulates common Wiki.js DOM/content patterns.
 5. Verify the theme locally before treating it as ready for Wiki.js testing.
 
-## 7. Deliverables
+## 8. Deliverables
 
 - `wiki.css`: final Wiki.js custom CSS.
-- `preview.html`: local verification page that imports `wiki.css`.
+- `preview.html`: local verification page that imports `wiki.css`; this is only a
+  validation aid and not part of the Wiki.js runtime customization.
 - Optional `README.md`: concise instructions for previewing locally and applying the CSS in Wiki.js.
 
-## 8. Local Verification Requirement
+## 9. Local Verification Requirement
 
 The finished work must be easy to validate on this machine before it is installed into
 a real Wiki.js instance.
@@ -121,7 +141,7 @@ The preview page should include representative Wiki content:
 - Info, warning, success, and danger callouts.
 - Buttons and common action controls.
 
-## 9. Acceptance Criteria
+## 10. Acceptance Criteria
 
 - The result no longer resembles the old teal theme.
 - The visual direction is recognizably closer to Confluence documentation.
@@ -131,4 +151,5 @@ The preview page should include representative Wiki content:
 - Tables, code blocks, blockquotes, and callouts are polished and consistent.
 - The theme can be previewed locally through `preview.html`.
 - The CSS can be copied into Wiki.js custom CSS without requiring source-code changes.
-
+- The implementation does not depend on hallucinated or unsupported Wiki.js extension
+  mechanisms.
