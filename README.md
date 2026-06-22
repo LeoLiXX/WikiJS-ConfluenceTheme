@@ -47,3 +47,31 @@ provided by your Wiki.js installation.
 
 Do not install this repository as a Wiki.js theme package or plugin. This project is
 intentionally scoped to custom CSS override usage.
+
+## Real Local Wiki.js Instance
+
+A real local Wiki.js 2.5.314 instance can be used for validation when `.runtime/` is
+present:
+
+```powershell
+Set-Location .\.runtime\wikijs-win
+node server
+```
+
+Current local test URLs:
+
+```text
+http://127.0.0.1:3001/
+http://127.0.0.1:3001/en/theme-test
+http://127.0.0.1:3001/a/theme
+```
+
+Local test credentials are stored in ignored runtime state:
+
+```text
+.runtime/wikijs-win/LOCAL-CREDENTIALS.txt
+```
+
+In Wiki.js, use **Administration > Theme** and paste `wiki.css` into the custom CSS
+field, then save. This updates Wiki.js theming `injectCSS`; it is still a custom CSS
+override, not a custom theme package.

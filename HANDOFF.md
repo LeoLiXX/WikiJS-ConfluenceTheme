@@ -870,6 +870,76 @@ Known risks:
 - Broad `.v-icon` sizing/color rules are intentional for the visual feedback, but real
   Wiki.js pages may reveal isolated icon cases that need narrower follow-up selectors.
 
+### 2026-06-22 - Real Local Wiki.js Deployment And CSS Injection
+
+Files changed:
+
+- `.gitignore`
+- `README.md`
+- `REAL-WIKIJS.md`
+- `HANDOFF.md`
+
+Runtime files created, ignored by Git:
+
+- `.runtime/wiki-js-windows.tar.gz`
+- `.runtime/wikijs-win/`
+- `.runtime/wikijs-win/config.yml`
+- `.runtime/wikijs-win/data/wiki.sqlite`
+- `.runtime/wikijs-win/LOCAL-CREDENTIALS.txt`
+- `.runtime/wikijs-win/*.log`
+
+Completed:
+
+- Checked that Docker and Podman are not available in the current PowerShell session,
+  and WSL has no installed Linux distribution.
+- Downloaded official Wiki.js release `v2.5.314`, published 2026-05-01, using the
+  Windows release asset `wiki-js-windows.tar.gz`.
+- Configured a lightweight local Wiki.js instance with Node.js and SQLite on
+  `127.0.0.1:3001`.
+- Completed Wiki.js setup with a local-only administrator account recorded in ignored
+  runtime state.
+- Injected the current `wiki.css` into real Wiki.js theming `injectCSS` through the
+  Wiki.js GraphQL `theming.setConfig` mutation.
+- Created a real Wiki.js Markdown validation page at `/en/theme-test` covering
+  headings, lists, tables, inline code, code blocks, blockquotes, tags, navigation, and
+  page chrome.
+- Added `REAL-WIKIJS.md` and updated `README.md` with startup, login, and Theme screen
+  instructions.
+
+Convergence checks:
+
+- Real Wiki.js local instance starts and listens on `127.0.0.1:3001`: Passed.
+- Setup wizard completed successfully: Passed.
+- `wiki.css` is stored via Wiki.js theming `injectCSS`: Passed.
+- Real validation page loads with injected CSS present in HTML: Passed.
+- Runtime files, database, logs, and credentials are ignored by Git under `.runtime/`:
+  Passed.
+- Deliverable boundary remains custom CSS override, not theme package/plugin/source
+  patch: Passed.
+
+Verification:
+
+- `docker --version`: failed because Docker is not installed or not in `PATH`.
+- `podman`: failed because Podman is not installed or not in `PATH`.
+- `wsl -l -v`: WSL exists, but no Linux distribution is installed.
+- `node --version`: `v24.13.0`.
+- Wiki.js log showed database connection, setup completion, GraphQL schema load, and
+  HTTP server running on port `3001`.
+- Requested `http://127.0.0.1:3001/`: HTTP 200.
+- Requested `http://127.0.0.1:3001/login`: HTTP 200.
+- Requested `http://127.0.0.1:3001/en/theme-test`: HTTP 200, length 23924,
+  `--wiki-primary` present, `injectCSS` present.
+- Generated real Wiki.js screenshot:
+  - `verification/wikijs-real-theme-test.png`
+
+Known risks:
+
+- This local runtime uses SQLite for lightweight validation; production Wiki.js should
+  use the database engine recommended by the deployment environment, commonly
+  PostgreSQL.
+- The local instance is real Wiki.js, but it is a disposable validation environment.
+  Credentials and database are intentionally stored under ignored `.runtime/`.
+
 ## Active Notes
 
 - `wiki.css` must be treated as a selector map, not a design source.
