@@ -20,15 +20,15 @@
       min-height: 100vh;
     }
 
-    .nav-header {
+    .preview-shell .nav-header {
       position: sticky;
       top: 0;
       z-index: 10;
       height: 56px;
     }
 
-    .nav-header.v-app-bar,
-    .nav-header .v-toolbar {
+    .preview-shell .nav-header.v-app-bar,
+    .preview-shell .nav-header .v-toolbar {
       align-items: center;
       display: flex;
       gap: 16px;
@@ -37,29 +37,29 @@
       width: 100%;
     }
 
-    .v-toolbar__title {
+    .preview-shell .v-toolbar__title {
       min-width: 180px;
     }
 
-    .subheading {
+    .preview-shell .subheading {
       font-size: 16px;
     }
 
-    .preview-search {
+    .preview-shell .preview-search {
       flex: 1 1 260px;
       max-width: 420px;
       min-width: 0;
       width: 100%;
     }
 
-    .v-input__slot {
+    .preview-shell .v-input__slot {
       align-items: center;
       display: flex;
       min-height: 36px;
       padding: 0 12px;
     }
 
-    .v-input__slot input {
+    .preview-shell .v-input__slot input {
       background: transparent;
       border: 0;
       font: inherit;
@@ -67,54 +67,54 @@
       width: 100%;
     }
 
-    .preview-body {
+    .preview-shell .preview-body {
       display: grid;
       grid-template-columns: 280px minmax(0, 1fr);
       min-height: calc(100vh - 56px);
     }
 
-    .v-navigation-drawer {
+    .preview-shell .v-navigation-drawer {
       padding: 16px 0;
     }
 
-    .v-list {
+    .preview-shell .v-list {
       margin: 0;
       padding: 0;
     }
 
-    .v-subheader {
+    .preview-shell .v-subheader {
       font-size: 12px;
       font-weight: 600;
       padding: 10px 20px 6px;
     }
 
-    .v-list-item,
-    .v-list-group__header {
+    .preview-shell .v-list-item,
+    .preview-shell .v-list-group__header {
       align-items: center;
       display: flex;
       gap: 10px;
       padding: 0 12px;
     }
 
-    .v-list-item__content {
+    .preview-shell .v-list-item__content {
       min-width: 0;
     }
 
-    .v-list-item__title {
+    .preview-shell .v-list-item__title {
       font-size: 14px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .v-list-item__subtitle {
+    .preview-shell .v-list-item__subtitle {
       font-size: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .v-icon {
+    .preview-shell .v-icon {
       align-items: center;
       display: inline-flex;
       flex: 0 0 auto;
@@ -124,7 +124,7 @@
       width: 20px;
     }
 
-    .preview-icon {
+    .preview-shell .preview-icon {
       border: 1.5px solid currentColor;
       border-radius: 3px;
       display: inline-block;
@@ -133,7 +133,7 @@
       width: 14px;
     }
 
-    .preview-icon.page::after {
+    .preview-shell .preview-icon.page::after {
       background: currentColor;
       content: "";
       height: 1.5px;
@@ -143,7 +143,7 @@
       width: 6px;
     }
 
-    .preview-icon.active::before {
+    .preview-shell .preview-icon.active::before {
       background: currentColor;
       content: "";
       height: 1.5px;
@@ -153,7 +153,7 @@
       width: 7px;
     }
 
-    .preview-chevron {
+    .preview-shell .preview-chevron {
       border-bottom: 1.7px solid currentColor;
       border-right: 1.7px solid currentColor;
       display: inline-block;
@@ -162,11 +162,11 @@
       width: 7px;
     }
 
-    .preview-chevron.right {
+    .preview-shell .preview-chevron.right {
       transform: rotate(-45deg);
     }
 
-    .preview-search-icon {
+    .preview-shell .preview-search-icon {
       border: 1.6px solid currentColor;
       border-radius: 50%;
       display: inline-block;
@@ -175,7 +175,7 @@
       width: 14px;
     }
 
-    .preview-search-icon::after {
+    .preview-shell .preview-search-icon::after {
       background: currentColor;
       content: "";
       height: 1.6px;
@@ -186,49 +186,49 @@
       width: 6px;
     }
 
-    .v-divider {
+    .preview-shell .v-divider {
       border: 0;
       border-top: 1px solid;
       margin: 12px 16px;
     }
 
-    .v-main {
+    .preview-shell .v-main {
       min-width: 0;
       overflow-x: hidden;
       padding: 36px 44px 80px;
     }
 
-    .page-header-section {
+    .preview-shell .page-header-section {
       margin: 0 0 28px;
       max-width: 100%;
     }
 
-    .caption {
+    .preview-shell .caption {
       margin-top: 6px;
     }
 
-    .contents {
+    .preview-shell .contents {
       margin: 0 auto 0 0;
       max-width: 100%;
     }
 
-    .v-card {
+    .preview-shell .v-card {
       margin: 18px 0;
       padding: 16px;
     }
 
-    .v-card__title {
+    .preview-shell .v-card__title {
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 4px;
     }
 
-    .v-card__subtitle {
+    .preview-shell .v-card__subtitle {
       font-size: 13px;
       margin-bottom: 12px;
     }
 
-    .v-btn {
+    .preview-shell .v-btn {
       align-items: center;
       border: 1px solid transparent;
       cursor: default;
@@ -240,14 +240,14 @@
       padding: 0 14px;
     }
 
-    .button-row {
+    .preview-shell .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin: 16px 0 4px;
     }
 
-    .editor-markdown-toolbar {
+    .preview-shell .editor-markdown-toolbar {
       align-items: center;
       display: flex;
       gap: 8px;
@@ -256,7 +256,117 @@
       padding: 6px 10px;
     }
 
-    .v-speed-dial {
+    .preview-shell .comments-preview {
+      margin-top: 28px;
+    }
+
+    .preview-shell .v-textarea .v-input__slot,
+    .preview-shell .v-text-field .v-input__slot {
+      position: relative;
+    }
+
+    .preview-shell .v-textarea fieldset,
+    .preview-shell .v-text-field fieldset {
+      border: 1px solid;
+      border-radius: 6px;
+      inset: 0;
+      margin: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .preview-shell .v-textarea textarea,
+    .preview-shell .v-text-field input {
+      border: 0;
+      font: inherit;
+      outline: 0;
+      width: 100%;
+    }
+
+    .preview-shell .v-textarea textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .preview-shell .v-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 8px;
+    }
+
+    .preview-shell .d-flex {
+      display: flex;
+    }
+
+    .preview-shell .align-center {
+      align-items: center;
+    }
+
+    .preview-shell .pt-3 {
+      padding-top: 12px;
+    }
+
+    .preview-shell .mr-1 {
+      margin-right: 4px;
+    }
+
+    .preview-shell .mr-3 {
+      margin-right: 12px;
+    }
+
+    .preview-shell .v-spacer {
+      flex: 1 1 auto;
+    }
+
+    .preview-shell .v-timeline {
+      margin-top: 18px;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    .preview-shell .v-timeline--dense::before {
+      bottom: 0;
+      content: "";
+      left: 13px;
+      position: absolute;
+      top: 0;
+    }
+
+    .preview-shell .v-timeline-item {
+      margin: 18px 0;
+      position: relative;
+    }
+
+    .preview-shell .v-timeline-item__dot {
+      left: -32px;
+      position: absolute;
+      top: 14px;
+    }
+
+    .preview-shell .v-timeline-item__inner-dot {
+      align-items: center;
+      border-radius: 999px;
+      display: flex;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    .preview-shell .v-avatar {
+      align-items: center;
+      border-radius: 999px;
+      display: flex;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    .preview-shell .v-card__text {
+      position: relative;
+    }
+
+    .preview-shell .v-speed-dial {
       bottom: 24px;
       display: flex;
       flex-direction: column;
@@ -265,66 +375,70 @@
       right: 24px;
     }
 
-    .v-btn--fab {
+    .preview-shell .v-btn--fab {
       border-radius: 999px;
       height: 48px;
       padding: 0;
       width: 48px;
     }
 
-    .v-footer {
+    .preview-shell .v-footer {
       margin-top: 48px;
       padding: 20px 0 0;
     }
 
     @media (max-width: 900px) {
-      .preview-body {
+      .preview-shell .preview-body {
         grid-template-columns: 1fr;
       }
 
-      .v-navigation-drawer {
+      .preview-shell .v-navigation-drawer {
         display: none;
       }
 
-      .v-main {
+      .preview-shell .v-main {
         padding: 24px 18px 96px;
       }
 
-      .headline,
-      .contents h1,
-      .contents h2,
-      .contents h3,
-      .contents h4,
-      .contents h5,
-      .contents p,
-      .contents li,
-      .caption {
+      .preview-shell .headline,
+      .preview-shell .contents h1,
+      .preview-shell .contents h2,
+      .preview-shell .contents h3,
+      .preview-shell .contents h4,
+      .preview-shell .contents h5,
+      .preview-shell .contents p,
+      .preview-shell .contents li,
+      .preview-shell .caption {
         overflow-wrap: anywhere;
       }
 
-      .nav-header.v-app-bar,
-      .nav-header .v-toolbar {
+      .preview-shell .nav-header.v-app-bar,
+      .preview-shell .nav-header .v-toolbar {
         gap: 10px;
         padding: 0 12px;
       }
 
-      .v-toolbar__title {
+      .preview-shell .v-toolbar__title {
         flex: 0 1 88px;
         min-width: auto;
       }
 
-      .subheading {
+      .preview-shell .subheading {
         display: block;
         overflow-wrap: anywhere;
       }
 
-      .preview-search {
+      .preview-shell .preview-search {
         flex: 1 1 auto;
         max-width: none;
       }
 
-      .nav-header .v-btn.primary {
+      .preview-shell .nav-header .v-btn.primary {
         display: none;
+      }
+
+      .preview-shell .v-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -451,10 +565,17 @@
 
             <h3>Code and callouts</h3>
             <p>Inline code such as <code>python -m http.server 4173</code> should remain quiet.</p>
-            <pre class="prismjs"><code>/* Wiki.js custom CSS override */
-#root .v-application .v-main .contents h2 {
-  border-bottom: 1px solid var(--wiki-border-subtle);
-}</code></pre>
+            <div class="code-toolbar">
+              <pre class="prismjs line-numbers language-css"><code class="language-css"><span class="token comment">/* Wiki.js custom CSS override */</span>
+<span class="token selector">#root .v-application .v-main .contents h2</span> <span class="token punctuation">{</span>
+  <span class="token property">border-bottom</span><span class="token punctuation">:</span> <span class="token number">1px</span> solid <span class="token function">var</span><span class="token punctuation">(</span><span class="token variable">--wiki-border-subtle</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+              <div class="toolbar">
+                <div class="toolbar-item">
+                  <button class="copy-to-clipboard-button">Copy</button>
+                </div>
+              </div>
+            </div>
 
             <blockquote class="is-info">
               <p>Info callout: use soft blue fill and a clear left border.</p>
@@ -492,6 +613,81 @@
                 <button class="v-btn primary"><span class="v-btn__content">Save</span></button>
               </div>
             </div>
+
+            <h5>Comments</h5>
+            <section class="comments-preview page-comments-card v-card v-sheet">
+              <div id="discussion" class="comments-container">
+                <div class="comments-header">
+                  <span class="v-icon">□</span>
+                  <span>Comments</span>
+                </div>
+                <div class="comments-main">
+                  <div class="v-input v-textarea v-textarea--outlined">
+                    <div class="v-input__slot">
+                      <fieldset></fieldset>
+                      <textarea id="discussion-new" placeholder="Add a comment..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="v-row">
+                    <div class="v-col">
+                      <div class="v-input v-text-field v-text-field--outlined">
+                        <div class="v-input__slot">
+                          <fieldset></fieldset>
+                          <input placeholder="Name">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="v-col">
+                      <div class="v-input v-text-field v-text-field--outlined">
+                        <div class="v-input__slot">
+                          <fieldset></fieldset>
+                          <input placeholder="Email">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-center pt-3">
+                    <span class="v-icon mr-1 blue-grey--text">M</span>
+                    <div class="caption blue-grey--text">Markdown formatting is supported</div>
+                    <span class="v-spacer"></span>
+                    <button class="v-btn blue-grey darken-2">
+                      <span class="v-icon">+</span>
+                      <span class="v-btn__content">Post comment</span>
+                    </button>
+                  </div>
+                  <hr class="v-divider">
+
+                  <div class="v-timeline v-timeline--dense">
+                    <div id="comment-post-id-1" class="v-timeline-item comments-post">
+                      <div class="v-timeline-item__dot">
+                        <div class="v-timeline-item__inner-dot">
+                          <div class="v-avatar blue-grey">
+                            <span class="white--text title">LL</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="v-card elevation-1">
+                        <div class="v-card__text">
+                          <div class="comments-post-actions">
+                            <span class="v-icon mr-3">✎</span>
+                            <span class="v-icon">×</span>
+                          </div>
+                          <div class="comments-post-name caption"><strong>Leo Li</strong></div>
+                          <div class="comments-post-date overline grey--text">a few minutes ago</div>
+                          <div class="comments-post-content mt-3">
+                            <p>Reviewed the onboarding notes and confirmed the deployment checklist is clear.</p>
+                            <p>Inline <code>code</code> and a compact command block are included for technical review.</p>
+                            <pre><code>npm run validate-theme</code></pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             <hr>
 

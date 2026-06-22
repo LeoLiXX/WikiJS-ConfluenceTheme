@@ -38,6 +38,8 @@ python -m http.server 4173
 - Links use Atlassian-like blue and underline on hover/focus.
 - Tables, inline code, code blocks, callouts, cards, buttons, editor toolbar, and FABs
   are visible and consistent.
+- Comments use a lightweight white surface with subtle borders, muted metadata, and
+  quiet code styling.
 - Narrow browser widths do not produce obvious text overlap or unusable table layout.
 
 ## Applying To Wiki.js

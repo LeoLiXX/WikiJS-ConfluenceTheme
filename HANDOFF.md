@@ -475,6 +475,7 @@ Known risks:
 Files changed:
 
 - `wiki.css`
+- `preview.html`
 - `HANDOFF.md`
 
 Completed:
@@ -992,7 +993,1177 @@ Known risks:
   light native button border. They are less prominent than before and can be further
   softened in a follow-up if desired.
 
+### 2026-06-22 - Real Wiki.js Folder Hierarchy And Home/Browse Preservation
+
+Files changed:
+
+- `wiki.css`
+- `REAL-WIKIJS.md`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Created multiple real Wiki.js pages under `/en/training-home`.
+- Real Wiki.js navigation config set to `MIXED`.
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- `tocPosition` preserved as `right`.
+
+Completed:
+
+- Created a real Training Home folder-style hierarchy in the local Wiki.js instance,
+  including folders:
+  - `Free Talk`
+  - `Harness`
+  - `Testing Training`
+  - `UX培训`
+  - `产品组培训`
+  - `制度 流程 技术规范`
+  - `开发技术培训`
+  - `自动测试培训主页`
+- Created direct pages under Training Home matching the customer screenshot shape,
+  including:
+  - `Confluence Wiki 新人快速上手`
+  - `General Management Skill ...`
+  - `Mentor Training Material`
+  - `Network Administrator Trai...`
+  - `PGM培训`
+  - `专项技能培训（开发技能、沟通...）`
+  - `公司内部常用链接`
+  - `新闻事入手`
+  - `软件安全与防护培训`
+- Restored the Wiki.js default-theme Home button and Browse/Main Menu toggle by using
+  supported navigation mode `MIXED`.
+- Confirmed `TREE` mode shows the page tree directly, but removes the Home/Browse
+  shortcut area in Wiki.js default theme; therefore `TREE` is not the preferred local
+  validation mode for this requirement.
+- Confirmed static navigation in Wiki.js 2.5.x is flat. Nested folders/pages are
+  generated from real page paths through Browse/page tree, not from static nav
+  children.
+- Styled the native Home/Browse shortcut area as large white buttons on the left
+  sidebar blue background, matching the user's reference direction while preserving
+  the native actions.
+- Updated blue-sidebar subheader/subtitle foreground so labels such as Current
+  Directory are readable on blue backgrounds.
+- Updated `REAL-WIKIJS.md` with the folder-hierarchy validation page and navigation
+  behavior notes.
+- Preserved the CSS-only deliverable boundary; no Wiki.js source files, templates,
+  plugins, theme packages, or injected JS were used.
+
+Convergence checks:
+
+- Local real Wiki.js has a multi-page folder hierarchy: Passed.
+- Home button is present in the left sidebar: Passed by browser DOM check.
+- Browse/Main Menu toggle is present in the left sidebar: Passed by browser DOM check.
+- Browse view on a child page shows Training Home Current Directory folders/pages:
+  Passed.
+- Blue sidebar labels use light foreground where needed: Passed by computed color
+  check for Current Directory, `rgba(255, 255, 255, 0.72)`.
+- Page Contents remains on the right: Passed, `tocPosition` is `right`.
+- Navigation config uses supported Wiki.js mode only: Passed, `MIXED`.
+- CSS remains valid by brace balance check: Passed, `118/118`.
+- Deliverable remains Wiki.js custom CSS plus validation docs: Passed.
+
+Verification:
+
+- Queried Wiki.js GraphQL navigation config and page tree.
+- Used sub-agent `Faraday` for read-only navigation capability verification.
+- Confirmed `NavigationItemInput` has no `children` field; static nav supports flat
+  items with fields `id`, `kind`, `label`, `icon`, `targetType`, `target`,
+  `visibilityMode`, and `visibilityGroups`.
+- Re-injected CSS through GraphQL `theming.setConfig` with required `theme`,
+  `iconset`, `darkMode`, `tocPosition`, `injectCSS`, `injectHead`, and `injectBody`
+  arguments.
+- Set navigation mode through GraphQL `navigation.updateConfig(mode: MIXED)`.
+- Browser/CDP verification generated screenshots:
+  - `verification/wikijs-training-mixed-default.png`
+  - `verification/wikijs-training-mixed-browse.png`
+  - `verification/wikijs-training-child-browse.png`
+  - `verification/wikijs-training-mixed-browse-final.png`
+- Final browser DOM check on
+  `http://127.0.0.1:3001/en/training-home/confluence-wiki-new-user-quick-start`
+  with Browse mode confirmed:
+  - Home button dimensions: `60x52`.
+  - Main Menu toggle dimensions: `151x52`.
+  - `Current Directory` present.
+  - All expected Training Home folders present.
+  - All expected Training Home direct pages present.
+
+Known risks:
+
+- In the local Wiki.js instance, the Browse root label renders as `/ sidebar.root`.
+  This appears to be a default-theme localization/runtime string issue, not caused by
+  the CSS. It was not patched with injected JS or source edits because the project
+  boundary is custom CSS only.
+- In `MIXED` mode, the initial sidebar view can depend on the user's browser
+  `localStorage.navPref`. The user can switch between Main Menu and Browse with the
+  native button. `TREE` mode makes Browse-like page tree the default, but sacrifices
+  the Home/Browse shortcut area.
+- Static navigation can use folder/page-looking icons on flat links, but cannot create
+  nested expandable folder trees in Wiki.js 2.5.x.
+
+### 2026-06-22 - Real Wiki.js Preview Page Restoration
+
+Files changed:
+
+- `REAL-WIKIJS.md`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Created real Wiki.js page `/en/theme-preview` with page id `40`.
+
+Completed:
+
+- Restored the earlier `preview.html` validation coverage into a real Wiki.js page at
+  `http://127.0.0.1:3001/en/theme-preview`.
+- Used Wiki.js Markdown content plus small inline HTML snippets to exercise existing
+  CSS selectors for cards, buttons, callouts, and editor-toolbar-like controls.
+- Covered page title, article headings, links, lists, table, inline code, code block,
+  status callouts, card/panel, buttons, and verification notes.
+- Kept real Wiki.js shell, app bar, sidebar, Page Contents, tags, and native floating
+  actions supplied by the Wiki.js runtime rather than mocked markup.
+- Did not add page-level JavaScript or page-level CSS.
+- Preserved the project boundary: the theme deliverable remains `wiki.css` injected
+  through Wiki.js custom CSS/theming config.
+
+Convergence checks:
+
+- `/en/theme-preview` exists in real Wiki.js: Passed, page id `40`.
+- Page uses the Markdown editor/content type: Passed, `editor=markdown`,
+  `contentType=markdown`.
+- Rendered content contains table, code block, card, primary button, and info callout:
+  Passed by GraphQL render check and browser DOM check.
+- Primary button uses blue background with white foreground: Passed by computed style,
+  `rgb(24, 104, 219)` background and `rgb(255, 255, 255)` text.
+- Page Contents remains on the right: Passed by browser DOM check.
+- Page has no document-level horizontal overflow at desktop viewport: Passed,
+  `clientWidth=1425`, `scrollWidth=1425`.
+
+Verification:
+
+- Queried `/en/theme-preview` by GraphQL `pages.singleByPath`; it did not exist before
+  creation.
+- Created the page through GraphQL `pages.create`.
+- Queried the created page and confirmed:
+  - `id=40`
+  - `path=theme-preview`
+  - `title=Wiki.js Confluence-like Theme Preview`
+  - `renderHasCard=true`
+  - `renderHasButton=true`
+  - `renderHasCallout=true`
+- Browser/CDP verification generated screenshot:
+  - `verification/wikijs-theme-preview-page.png`
+
+Known risks:
+
+- The restored page cannot reproduce top app bar, sidebar, or floating action markup
+  exactly from `preview.html` because those are real Wiki.js runtime components on this
+  page. That is intentional for validation fidelity.
+- The page uses inline HTML inside Markdown to exercise Vuetify-like selector classes.
+  This is content-only validation and does not introduce unsupported Wiki.js theme
+  APIs, theme packages, source patches, or injected JS.
+
+### 2026-06-22 - Sidebar Visual Refinement To Light Navigation
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Addressed feedback that the full blue left sidebar felt dated, visually heavy, and
+  unlike Confluence documentation navigation.
+- Reworked the left navigation from full blue background to a white/light-gray
+  documentation sidebar.
+- Kept the native Home and Browse/Main Menu shortcut buttons, but restyled them as
+  flatter modern tool buttons with light border, no heavy shadow, and subtle hover.
+- Further refined the Home/Browse shortcut area to use a white background and
+  borderless lightweight buttons after user feedback that the light-gray band and
+  button design still felt too heavy.
+- Removed the active navigation item's left blue inset border after user feedback
+  that it was visually too heavy; selected state now relies on pale blue fill and blue
+  text/icon only.
+- Limited blue usage to active/hover/focus emphasis rather than the entire sidebar
+  surface.
+- Fixed the poor hover contrast issue by ensuring hovered navigation rows use dark
+  text on a pale neutral background, and shortcut buttons use pale blue with blue
+  text/icons.
+- Reduced the awkward "large blue empty area" when sidebar content is short by keeping
+  the drawer background white.
+- Preserved the CSS-only Wiki.js custom CSS boundary and did not change navigation
+  behavior.
+
+Convergence checks:
+
+- Left drawer background is white: Passed, computed `rgb(255, 255, 255)`.
+- Left navigation list background is white: Passed, computed `rgb(255, 255, 255)`.
+- Home/Browse shortcut buttons remain present and usable: Passed.
+- Shortcut buttons are lighter/modernized: Passed, `48px` height, no box-shadow,
+  light border `rgb(215, 220, 227)`.
+- Final shortcut refinement uses `44px` height, transparent default border, no
+  shadow, and a white toolbar background: Passed by CSS/computed style check.
+- Shortcut hover state has readable contrast: Passed, hover background
+  `rgb(233, 242, 255)`, text/icon `rgb(24, 104, 219)`.
+- Navigation row hover no longer uses low-contrast white foreground: Passed, hover
+  background `rgb(244, 245, 247)`, title color remains dark.
+- Active navigation no longer has a heavy left border: Passed, `box-shadow: none`.
+- Page Contents remains on the right and was not made blue: Passed by screenshot.
+- CSS remains valid by brace balance check: Passed, `119/119`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Generated browser screenshots:
+  - `verification/wikijs-sidebar-light-desktop.png`
+  - `verification/wikijs-sidebar-light-desktop-hover.png`
+  - `verification/wikijs-sidebar-light-final.png`
+  - `verification/wikijs-sidebar-light-final-hover.png`
+- Used Chrome DevTools Protocol to inspect computed styles for drawer, list,
+  Home/Browse buttons, and hover states.
+- Ran CSS brace balance and forbidden-pattern checks; no old teal, gradient, or
+  unsupported theme-mechanism terms were found in `wiki.css`.
+
+Known risks:
+
+- The sidebar still uses Wiki.js default theme structure and icon set; the CSS can
+  refine surfaces, colors, spacing, and states, but cannot replace the default theme's
+  component layout without leaving the custom CSS boundary.
+
+### 2026-06-22 - Comments Area Lightweight Confluence-like Refinement
+
+Files changed:
+
+- `wiki.css`
+- `preview.html`
+- `README.md`
+- `REAL-WIKIJS.md`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Added one local validation comment to `/en/theme-preview`.
+- Generated screenshots in ignored `verification/`.
+
+Completed:
+
+- Addressed feedback that the whole Comments area was visually too heavy.
+- Audited the local Wiki.js 2.5.314 runtime for default comments selectors:
+  - page slot injection is in `.runtime/wikijs-win/server/views/page.pug`;
+  - default provider mounts `<comments></comments>`;
+  - compiled comments component uses `#discussion-new`, `.comments-post`,
+    `.comments-post-actions`, `.comments-post-name`, `.comments-post-date`,
+    `.comments-post-content`, `.comments-post-editcontent`, `v-timeline`, `v-avatar`,
+    `v-card`, `v-textarea`, and `v-text-field`;
+  - default theme CSS uses `.comments-container`, `.comments-header`, and
+    `.comments-main` with a heavy blue-grey header and grey body.
+- Added a dedicated comments CSS section instead of expanding global `.v-card`,
+  `.v-btn`, `.blue-grey`, or `.pink` overrides.
+- Changed the Comments shell from heavy blue-grey/grey block styling to:
+  - white `.page-comments-card` / `.comments-container`;
+  - white `.comments-header` with subtle bottom border;
+  - white `.comments-main`;
+  - light timeline rule;
+  - pale-blue avatar;
+  - white comment cards with subtle border and no shadow;
+  - muted metadata;
+  - quiet inline code and code block styling.
+- Restyled default comments post/update buttons from `blue-grey darken-2` to the
+  theme primary blue, scoped behind the comments input/edit selectors.
+- Added a comments section to `preview.html` using the same key local classes, so the
+  Comments visual treatment can be checked without relying on live Wiki.js comments.
+- Follow-up refinement from user screenshot:
+  - moved the new-comment input border from Vuetify `fieldset` to the scoped
+    `.v-input__slot` to keep all four edges visible;
+  - made the Post Comment button icon/content inherit the white foreground;
+  - reduced focus treatment to the normal light border/no heavy blue frame in the
+    verified Wiki.js rendering.
+- Updated README and real Wiki.js validation notes.
+- Preserved the CSS-only Wiki.js custom CSS boundary; no source patch, plugin, custom
+  theme package, or injected JavaScript was introduced.
+
+Convergence checks:
+
+- `wiki.css` has dedicated comments rules and does not rely on unsupported Wiki.js
+  APIs: Passed.
+- Comments header no longer uses the heavy blue-grey bar: Passed, real Wiki.js
+  computed `.comments-header` background is `rgb(255, 255, 255)`.
+- Comments main area no longer uses the heavy grey block: Passed, real Wiki.js
+  computed `.comments-main` background is `rgb(255, 255, 255)`.
+- Comment card is white, lightly bordered, and shadowless: Passed, real Wiki.js
+  computed `.comments-post .v-card` background `rgb(255, 255, 255)`, border
+  `rgb(215, 220, 227)`, `box-shadow: none`.
+- Comment avatar is pale blue rather than heavy blue-grey: Passed, computed
+  `rgb(233, 242, 255)` background and `rgb(24, 104, 219)` text.
+- Default comments inline code no longer uses pink background: Passed, computed
+  `rgb(241, 242, 244)`.
+- Default comments code block no longer uses black background: Passed, computed
+  `rgb(247, 248, 249)`.
+- New-comment input shows all four borders: Passed, computed `.v-input__slot` border
+  top/right/bottom/left are all `1px` and `rgb(215, 220, 227)`.
+- Post Comment icon matches button foreground: Passed, computed icon color is
+  `rgb(255, 255, 255)`.
+- Focus frame is not heavy blue: Passed, focused `#discussion-new` keeps a light
+  border and no heavy box-shadow in the verified real Wiki.js render.
+- Static preview demonstrates the Comments shell and post controls: Passed.
+- Real local Wiki.js demonstrates the Comments shell with an actual comment: Passed.
+- No document horizontal overflow in both static and real checks: Passed.
+- CSS brace balance: Passed, `160/160`.
+- Forbidden heavy/default comments colors are absent from `wiki.css` and
+  `preview.html`: Passed for `rgba(233,30,99`, `#111`, `#607d8b`, and `#eceff1`.
+
+Verification:
+
+- Used sub-agent `Einstein` for read-only selector and risk review.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Created one validation comment on `/en/theme-preview` through GraphQL
+  `comments.create`.
+- Confirmed local static preview is available:
+  - `http://localhost:4173/preview.html`: HTTP 200.
+- Confirmed real local Wiki.js page is available:
+  - `http://127.0.0.1:3001/en/theme-preview`: HTTP 200.
+- Used Chrome DevTools Protocol to inspect computed styles and capture screenshots:
+  - `verification/preview-comments-light-final.png`
+  - `verification/wikijs-comments-light-final.png`
+  - `verification/wikijs-comments-border-final.png`
+- Confirmed browser support for `:has()` in the local Chrome check:
+  `CSS.supports('selector(:has(*))') === true`.
+
+Known risks:
+
+- The input wrapper rules use `:has(#discussion-new)` so the CSS can target the
+  Vuetify parent field without changing markup. This works in modern Chrome/Edge and
+  was verified locally, but older browsers that do not support `:has()` will still
+  get the safer direct `#discussion-new` / `.comments-post*` styling and may miss the
+  parent outline refinements.
+- These selectors are for the built-in Wiki.js comments provider. Third-party
+  providers such as Disqus, Commento, or Artalk inject their own containers and should
+  be validated separately before adding provider-specific CSS.
+
+### 2026-06-22 - Code Block, Callout, And Copy Button Feedback
+
+Files changed:
+
+- `wiki.css`
+- `preview.html`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshots in ignored `verification/`.
+
+Completed:
+
+- Addressed feedback that code block colors were too muddy by increasing contrast:
+  - code block background remains light, `rgb(247, 248, 249)`;
+  - code text is now darker, `rgb(15, 23, 42)`;
+  - Prism token colors are scoped under `.v-main .contents` only.
+- Removed visible callout pseudo-icons entirely because the native Wiki.js icon
+  pseudo-element can sit outside the callout box. Callouts now rely on restrained
+  fills and left status borders.
+- Added the real Wiki.js Prism toolbar selector:
+  `.contents div.code-toolbar > .toolbar .toolbar-item > button`.
+- Replaced the copy button text treatment with a CSS-only SVG mask using the
+  Font Awesome copy path supplied by the user. This avoids relying on Font Awesome
+  font availability and keeps the deliverable CSS-only.
+- Updated `preview.html` to simulate the real `div.code-toolbar > .toolbar` DOM
+  shape instead of only a class-based mock button.
+- Used sub-agent `James` for focused read-only runtime DOM verification, keeping the
+  main thread out of broad selector investigation.
+
+Convergence checks:
+
+- Code block text/background contrast is clearer in static preview and real Wiki.js:
+  Passed, computed real Wiki.js pre background `rgb(247, 248, 249)` and text
+  `rgb(15, 23, 42)`.
+- Copy button no longer displays low-contrast text: Passed, computed text color is
+  transparent and font size is `0px`; original `Copy` text remains in DOM.
+- Copy button uses an icon instead of hand-drawn double borders: Passed, computed
+  `::before` uses a data-URI SVG mask, `17px` by `17px`, with background
+  `rgb(23, 43, 77)`.
+- Real Wiki.js copy button is covered even though it has no class: Passed, sub-agent
+  found `<button>Copy</button>` under `div.code-toolbar > .toolbar .toolbar-item`.
+- Callout icons no longer overflow: Passed, computed real Wiki.js
+  `blockquote::before` display is `none`.
+- Static preview uses the real toolbar shape: Passed.
+- CSS remains valid by brace balance check: Passed, `183/183`.
+- No Font Awesome font dependency remains in `wiki.css`: Passed.
+- No document horizontal overflow in both static and real checks: Passed.
+- CSS-only Wiki.js custom CSS boundary is preserved: Passed.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Confirmed local static preview is available:
+  - `http://localhost:4173/preview.html`: HTTP 200.
+- Confirmed real local Wiki.js page is available:
+  - `http://127.0.0.1:3001/en/theme-preview`: HTTP 200.
+- Used Chrome DevTools Protocol to inspect computed styles and capture screenshots:
+  - `verification/preview-code-callout-copy.png`
+  - `verification/wikijs-code-callout-copy.png`
+  - `verification/preview-copy-svg-mask.png`
+  - `verification/wikijs-copy-svg-mask.png`
+  - `verification/wikijs-copy-svg-mask-focused.png`
+
+Known risks:
+
+- The copy button remains a CSS override of Wiki.js/Prism runtime DOM. If Wiki.js
+  changes the Prism toolbar markup in a future version, the structural selector may
+  need to be adjusted.
+- The SVG mask uses a CSS data URI and should work in current Chrome/Edge, which are
+  the local validation targets. Very old browsers without CSS mask support would fall
+  back to a blank visual button while retaining the original DOM text for assistive
+  technology.
+
+### 2026-06-22 - Inter Font Loading Correction
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Corrected the previous font setup: `Inter` was present in the font stack but was not
+  explicitly loaded.
+- Added a top-level Google Fonts `@import` to `wiki.css` for Inter and Roboto, using
+  the same family parameters provided by the user.
+- Updated `--wiki-font` to quote `"Inter"` and include `Roboto` before system
+  fallbacks.
+- Kept the deliverable as a single Wiki.js custom CSS file rather than requiring
+  template edits, injected JavaScript, or a custom theme package.
+
+Convergence checks:
+
+- Google Fonts CSS endpoint is reachable locally: Passed, HTTP 200.
+- `@import` appears at the first line of `wiki.css`: Passed.
+- CSS remains valid by brace balance check: Passed, `183/183`.
+- Real Wiki.js computed font stack starts with Inter: Passed.
+- Real Wiki.js naturally loads Inter after waiting: Passed,
+  `document.fonts.check('16px "Inter"') === true`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol:
+  - computed app font family:
+    `Inter, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", ...`;
+  - loaded Inter font faces present in `document.fonts`.
+
+Known risks:
+
+- This depends on access to `fonts.googleapis.com` / `fonts.gstatic.com`. If a target
+  deployment blocks external fonts, the CSS will fall back to Roboto/system/Chinese
+  fonts. Using Wiki.js head injection with preconnect links would improve loading
+  performance but would add a second deliverable surface beyond `wiki.css`.
+
+### 2026-06-22 - Sidebar Shortcut Row Height Alignment
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshot in ignored `verification/`.
+
+Completed:
+
+- Reduced the left sidebar Home/Browse shortcut row height so it aligns with the main
+  breadcrumb toolbar.
+- Changed the shortcut row from `10px` vertical padding and `44px` buttons to `6px`
+  vertical padding, `36px` buttons, and a `48px` row minimum height.
+- Reduced the Home shortcut button width from `52px` to `40px` and icon size from
+  `24px` to `20px`.
+
+Convergence checks:
+
+- Left shortcut row height matches the main breadcrumb toolbar: Passed, measured left
+  row `49px` and main toolbar `48px`.
+- Shortcut buttons remain comfortably clickable: Passed, measured button `40px x 36px`.
+- Visual separator line between sidebar and content remains aligned: Passed by
+  screenshot.
+- CSS remains valid by brace balance check: Passed, `183/183`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Captured screenshot:
+  - `verification/wikijs-sidebar-toolbar-compact.png`
+
+Known risks:
+
+- If Wiki.js changes the left shortcut row class `.pa-3.d-flex.blue.darken-3`, this
+  compact sizing selector will need to be revisited.
+
+### 2026-06-22 - Sidebar And Breadcrumb Divider Consistency
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshot in ignored `verification/`.
+
+Completed:
+
+- Unified the bottom divider under the left Home/Browse shortcut row and the main
+  breadcrumb toolbar.
+- Added a scoped rule for the real Wiki.js breadcrumb toolbar under `.v-main` so its
+  divider uses the same subtle border token as the sidebar shortcut row.
+- Corrected the selector after verifying the toolbar is under `.v-main__wrap`, not a
+  direct child of `.v-main`.
+
+Convergence checks:
+
+- Left shortcut row divider: Passed, `1px solid rgb(215, 220, 227)`.
+- Main breadcrumb toolbar divider: Passed, `1px solid rgb(215, 220, 227)`.
+- Both toolbar shadows are disabled: Passed, `box-shadow: none`.
+- CSS remains valid by brace balance check: Passed, `184/184`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Captured screenshot:
+  - `verification/wikijs-toolbar-divider-unified.png`
+
+Known risks:
+
+- The main toolbar selector depends on Wiki.js/Vuetify classes
+  `.v-toolbar.v-toolbar--dense` and `.grey.lighten-3`; if Wiki.js changes that
+  breadcrumb toolbar markup, this alignment rule should be revisited.
+
+### 2026-06-22 - Right Rail Frame Regression Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshots in ignored `verification/`.
+
+Completed:
+
+- Fixed a regression where the right rail Talk card picked up the main Comments
+  area border styling because both use `.page-comments-card`.
+- Scoped the main Comments card border to `.page-comments-card:has(#discussion)` so
+  it targets the actual discussion section, not the right rail Talk shortcut card.
+- Removed the frame from the right rail Talk card and kept its View Discussion button
+  as a light outlined action, matching the earlier screenshot.
+- Lightened the right rail share/print shortcuts from large square joined buttons to
+  compact `32px` icon buttons.
+- Fixed a second regression where the global breadcrumb toolbar divider rule applied
+  to the right rail shortcut toolbar, creating an unwanted bottom line.
+
+Convergence checks:
+
+- Right rail Talk card has no outer border: Passed, computed border `0px none`.
+- Right rail shortcut card has no outer border: Passed, computed border `0px none`.
+- Right rail shortcut toolbar has no bottom long line: Passed, computed
+  `border-bottom: 0px none`.
+- Shortcut buttons remain visible and clickable: Passed, measured `32px x 32px`.
+- CSS remains valid by brace balance check: Passed, `190/190`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Captured screenshots:
+  - `verification/wikijs-right-rail-unframed.png`
+  - `verification/wikijs-right-rail-shortcuts-no-line.png`
+
+Known risks:
+
+- The main Comments scoping uses `:has(#discussion)`. It is verified in the local
+  Chrome/Edge target; older browsers without `:has()` will not receive the main
+  Comments card border refinement, but the right rail no longer depends on that rule.
+
+### 2026-06-22 - Header Strip, Heading Anchor, And List Marker Polish
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshots in ignored `verification/`.
+
+Completed:
+
+- Hid the Wiki.js shell page header strip `.page-header-section`, leaving the article
+  content heading visible.
+- Removed card-like rounded corners from the breadcrumb toolbar and kept its subtle
+  bottom divider.
+- Hid Wiki.js generated heading anchor glyphs (`¶`) via scoped `.contents h* >
+  .toc-anchor` rules.
+- Changed article unordered lists from triangle markers to standard disc bullets and
+  suppressed Wiki.js' extra `li::before` triangle pseudo-marker.
+
+Convergence checks:
+
+- Shell page header strip is hidden: Passed, computed display `none` and height `0`.
+- Article H1/H2 remain visible: Passed.
+- Breadcrumb toolbar has no radius: Passed, computed `border-radius: 0px`.
+- Heading anchor glyph is hidden: Passed, `.toc-anchor` computed display `none` and
+  width `0`.
+- Article unordered list marker is a round bullet without overlaid triangle: Passed,
+  computed `list-style-type: disc`, `li::before` display `none`, marker color
+  `rgb(107, 110, 118)`.
+- CSS remains valid by brace balance check: Passed, `193/193`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Captured screenshots:
+  - `verification/wikijs-page-header-hidden.png`
+  - `verification/wikijs-page-header-hidden-breadcrumb-square.png`
+  - `verification/wikijs-heading-anchor-hidden.png`
+  - `verification/wikijs-content-list-disc.png`
+  - `verification/wikijs-content-list-disc-only.png`
+
+Known risks:
+
+- Hiding `.toc-anchor` removes the visible paragraph-link glyph, but the generated
+  heading IDs and right-side Page Contents navigation remain available.
+
+### 2026-06-22 - Code Block Text Selection Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshot in ignored `verification/`.
+
+Completed:
+
+- Made code block text explicitly selectable by setting `user-select: text` on
+  `.contents pre`, `.contents .prismjs`, nested `code`, and token children.
+- Set code text cursor to `text`.
+- Hid Prism line-number rows and reset line-number padding in toolbar code blocks,
+  because the line-number layer caused visible text ghosting and blocked practical
+  drag selection.
+- Applied the same clarity direction to Comments code blocks: stronger text color,
+  normal font weight, no text-shadow, monospace sizing, and selectable text.
+
+Convergence checks:
+
+- Code block `pre` and `code` compute to `user-select: text`: Passed.
+- Prism line-number rows no longer render over code text: Passed, computed
+  `.line-numbers-rows` display `none`.
+- Toolbar code block padding is reset after hiding line numbers: Passed, computed
+  left padding `16px`.
+- Simulated drag selection inside the real Wiki.js code block produces cross-line
+  selected text: Passed, selected text length `76`.
+- CSS remains valid by brace balance check: Passed, `198/198`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Captured screenshot:
+  - `verification/wikijs-code-selectable.png`
+  - `verification/wikijs-code-selectable-no-line-numbers.png`
+
+Known risks:
+
+- The line-number selector assumes Prism's common `.line-numbers-rows` markup. If a
+  future highlighter changes line-number markup, the text selection rule may need a
+  small adjustment.
+- The Comments code block CSS is present, but the latest focused runtime check did
+  not find a mounted comment code block in the active page state. It should be
+  visually rechecked when a comment with a code block is visible.
+
+### 2026-06-22 - Code Block Drag, Syntax Highlighting, Comments Boundary, And Callout Spacing
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Generated screenshots in ignored `verification/`.
+
+Completed:
+
+- Fixed the remaining real-browser code block drag issue by keeping the Prism toolbar
+  layer non-interactive and setting `-webkit-user-drag: none` on article code blocks,
+  token spans, the Prism toolbar, and the native Copy button.
+- Kept the Copy icon visible on hover/focus while preventing the toolbar overlay from
+  hijacking text selection.
+- Restored stronger Prism token colors in article code blocks:
+  comments muted gray, selectors/strings green, punctuation amber, properties red,
+  keywords blue, and functions purple.
+- Scoped the same token color rules to `.comments-post-content .token` for safety if
+  Wiki.js ever emits Prism tokens in comments.
+- Verified the current Wiki.js Comments renderer outputs plain
+  `.comments-post-content pre > code.language-bash` for comment code blocks, with no
+  `div.code-toolbar`, no `.toolbar`, no native Copy button, and no Prism token spans.
+- Did not create a fake Comments copy icon, because CSS-only cannot add clipboard
+  behavior or a real button where Wiki.js does not render one.
+- Adjusted callout `blockquote` spacing so single-line callouts have equal top/bottom
+  padding, zero first/last child margins, and stable vertical centering.
+
+Convergence checks:
+
+- Article code text hit-test starts on `.token` / `code`, not the toolbar: Passed.
+- Simulated drag selection in the real Wiki.js article code block selects text:
+  Passed, selected text length `117`.
+- No `dragstart` fired during article code block text selection: Passed.
+- Article Copy button remains available and computes `display: inline-flex`,
+  `pointer-events: auto`, and `-webkit-user-drag: none`: Passed.
+- Article Prism token colors are visibly distinct: Passed, computed examples include
+  selector `rgb(0, 135, 90)`, property `rgb(201, 55, 44)`, function
+  `rgb(101, 84, 192)`, and keyword blue via the updated token rules.
+- Comments code block exists and remains readable/selectable: Passed, computed
+  background `rgb(247, 248, 249)` and text `rgb(15, 23, 42)`.
+- Comments native Copy control exists: Failed by design/DOM boundary, verified
+  `0` copy candidates under `.comments-post-content`.
+- Comments Prism token spans exist: Failed by current Wiki.js renderer boundary,
+  verified `0` `.comments-post-content .token` nodes.
+- Callout top/bottom padding is equal: Passed, computed `14px` / `14px`.
+- Callout child first/last margins are removed: Passed, computed `0px` top and
+  bottom margins for the inner paragraph.
+- CSS remains valid by brace balance check: Passed, `200/200`.
+- Deliverable remains Wiki.js custom CSS only: Passed.
+
+Verification:
+
+- Used sub-agent `Harvey` for read-only CodeBlock drag/toolbar investigation.
+- Used sub-agent `Godel` for read-only article-vs-comments code block DOM
+  investigation.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Verified `http://127.0.0.1:3001/en/theme-preview` with Chrome DevTools Protocol.
+- Queried Wiki.js GraphQL comments list for `/en/theme-preview`; confirmed comment
+  `id=1` renders a fenced bash code block.
+- Captured screenshots:
+  - `verification/wikijs-code-highlight-restored.png`
+  - `verification/wikijs-comments-codeblock-no-copy-native.png`
+  - `verification/wikijs-comments-codeblock-visible.png`
+  - `verification/wikijs-callout-spacing-even.png`
+
+Known risks:
+
+- Manual browser selection should be checked by the user in their normal/private
+  window after a hard refresh, because CDP can verify DOM hit testing and selection
+  behavior but cannot perfectly represent every hand drag path.
+- Comments copy icon/functionality would require Wiki.js to render a native copy
+  control or an approved JavaScript/source change. It is intentionally not faked in
+  `wiki.css`.
+- Comments code highlighting is limited by current Wiki.js rendered markup. The CSS
+  is ready for token spans if they appear, but current comments render plain code.
+
 ## Active Notes
+
+### 2026-06-22 - Selector Pollution Reduction And Callout Paragraph Spacing
+
+Files changed:
+
+- `wiki.css`
+- `preview.html`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Updated Callout paragraph spacing to match the user's clarified intent:
+  `blockquote > p` now keeps `margin: 8px 0 !important`, so single-paragraph
+  callouts retain balanced top/bottom breathing room and multi-paragraph callouts do
+  not collapse into a single block.
+- Reduced real Wiki.js layout pollution from preview-oriented Vuetify primitives:
+  global `.v-card` / `.v-sheet` rules are now scoped to `.v-main .contents`.
+- Replaced global app-wide `.v-btn` / `.v-icon` styling with an explicit target
+  whitelist covering known surfaces: nav header, navigation drawer, article contents,
+  right rail/page cards, comments, editor toolbar, and speed dial.
+- Scoped the dense toolbar divider rule to `.v-main .v-main__wrap > .v-toolbar...`
+  instead of every dense toolbar under `.v-main`.
+- Namespaced `preview.html` structure/helper CSS under `.preview-shell`, so local
+  preview scaffolding no longer masks real `wiki.css` selector collisions.
+
+Convergence checks:
+
+- Callout paragraph rule preserves top and bottom margin: Passed by source check,
+  `margin: 8px 0 !important`.
+- CSS brace balance remains valid: Passed, `205/205`.
+- Preview helper CSS no longer has bare `.v-card`, `.v-btn`, `.v-icon`, `.v-main`,
+  `.v-row`, or similar Vuetify structure selectors: Passed by `rg` check.
+- `wiki.css` no longer has bare global `.v-btn`, `.v-icon`, `.v-card`, or `.v-sheet`
+  rules: Passed by `rg` check.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Deliverable remains Wiki.js custom CSS only: Passed.
+
+Verification:
+
+- Used sub-agent `Poincare` for read-only preview-vs-real-selector pollution review.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Static checks performed with `rg` and brace-count checks.
+
+Known risks:
+
+- Button styling is now intentionally scoped by known Wiki.js surface. If a future
+  page introduces a new button surface outside the whitelist, it may need a targeted
+  selector instead of restoring global `.v-btn` styling.
+- `preview.html` is closer to a validation harness after namespacing, but it still
+  cannot fully represent every real Wiki.js Vuetify state.
+
+### 2026-06-22 - Real Wiki.js Code Block Drag Selection Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Rechecked CodeBlock selection against the real Wiki.js page
+  `http://127.0.0.1:3001/en/theme-preview`, not `preview.html`.
+- Found that the visually hidden Prism Copy button still had a clickable hit-test
+  area before hover/focus. That invisible button could intercept manual drag paths
+  near the top-right of the code block and show a blocked cursor.
+- Added `cursor: text` to article code blocks.
+- Made Prism toolbar children and the Copy button non-interactive by default, then
+  restored Copy button `pointer-events: auto` only when the code block is
+  `:hover` or `:focus-within`.
+- Added a `pre:active ~ .toolbar` / `.prismjs:active ~ .toolbar` guard so a drag
+  that starts from code text keeps the Copy overlay non-interactive while the mouse
+  button is held down.
+- After the user's manual test still failed in real Wiki.js, changed article code
+  blocks to reserve a `48px` top toolbar area. This physically separates the Copy
+  button from the first line of code text instead of relying only on pointer-events
+  state during drag.
+- After the user reported the reserved toolbar area made the layout worse and still
+  did not fix manual selection, reverted the code block padding back to the compact
+  `18px 48px 18px 16px` layout.
+- Disabled CodeBlock Copy toolbar mouse hit-testing completely with
+  `pointer-events: none !important`, prioritizing native text selection over CSS-only
+  Copy button clickability.
+- Updated `preview.html` CodeBlock to use static Prism-like token spans
+  (`.token.comment`, `.token.selector`, `.token.property`, etc.) so the preview can
+  exercise syntax highlight colors without adding a runtime highlighter.
+
+Convergence checks:
+
+- Real Wiki.js code block is `div.code-toolbar > pre.prismjs.line-numbers > code`:
+  Passed.
+- Hidden toolbar computes `opacity: 0` and `pointer-events: none`: Passed.
+- Hidden Copy button now computes `pointer-events: none` before hover: Passed.
+- The former Copy hot area now hit-tests the `pre`, not the invisible button:
+  Passed.
+- Copy button remains clickable when intentionally hovered: Passed, hover hit-test
+  finds the `BUTTON` and button computes `pointer-events: auto`.
+- Copy button no longer overlaps first code token in real Wiki.js: Passed, button
+  rect `y=178-208` and first token starts at `y=219`.
+- Compact CodeBlock layout restored: Passed, real `pre` padding computes to
+  `18px 48px 18px 16px`.
+- Copy toolbar and button no longer receive mouse events: Passed, real Copy button
+  computes `pointer-events: none`.
+- Former Copy area now hit-tests the `pre` element with `cursor: text` and
+  `user-select: text`: Passed.
+- Simulated drag selection in the real Wiki.js article code block creates text
+  selection even when the drag path goes near the Copy overlay: Passed, selected
+  text length `132`.
+- Preview CodeBlock contains static Prism token markup: Passed by source check.
+- CSS brace balance remains valid: Passed, `207/207`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Used sub-agent `Galileo` for read-only investigation; it confirmed the real code
+  text was selectable and the remaining blocker was the Copy overlay area.
+
+Known risks:
+
+- The Copy button intentionally becomes clickable only after hover/focus makes the
+  toolbar visible. This preserves copy functionality while avoiding an invisible
+  hit-test target over selectable text.
+
+### 2026-06-22 - Content Preview Button Regression Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Restored scoped component scaffolding for the content-area sample card/buttons after
+  global Vuetify selector reduction made real Wiki.js render the page-content
+  examples as small text chips.
+- Added `.v-main .contents`-scoped card padding/margin/title/subtitle rules.
+- Added `.v-main .contents`-scoped `.v-btn` box-model rules so Wiki.js-rendered
+  anchor buttons (`<a class="v-btn ...">`) regain inline-flex layout, height, padding,
+  and spacing.
+- Added `.v-main .contents`-scoped `.editor-markdown-toolbar` sample layout rules so
+  the sample toolbar retains a proper row, gap, and button sizing without restoring
+  app-wide `.v-btn` pollution.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `212/212`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js card buttons under `/en/theme-preview` render as `inline-flex` with
+  `34px` height and `0px 14px` padding: Passed.
+- Real Wiki.js primary/danger content buttons keep readable white foreground:
+  Passed.
+- Real Wiki.js editor toolbar sample renders as a flex row with `8px` gap and `34px`
+  buttons: Passed.
+- Rules remain scoped under `.v-main .contents`: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+Known risks:
+
+- These rules intentionally style demo/sample Vuetify-like markup when it appears
+  inside article `.contents`. They do not restore global `.v-btn` styling.
+
+### 2026-06-22 - Right Rail Tags Color Alignment
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Recolored the right-rail Wiki.js Tags card from default teal/green to the same
+  shallow blue family used for active TOC/navigation surfaces.
+- Scoped the override to `.page-col-sd .page-tags-card` so it does not affect Prism
+  `.token.tag`, article content, or other Vuetify chips elsewhere.
+- Overrode Wiki.js default `teal lighten-5` chip background and `teal--text`
+  icon/text color.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `216/216`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js Tags label computes to primary blue: Passed,
+  `rgb(24, 104, 219)`.
+- Real Wiki.js tag chip background computes to pale blue: Passed,
+  `rgb(233, 242, 255)`.
+- Real Wiki.js tag icon/text computes to primary blue: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol with a wide viewport against the real Wiki.js tab on
+  `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+Known risks:
+
+- The selector assumes Wiki.js keeps the right rail tag container class
+  `.page-tags-card` and Vuetify chip markup. If Wiki.js changes this DOM, retarget the
+  scoped tag rules.
+
+### 2026-06-22 - Content Secondary Button Border Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Added a neutral button style for `.v-main .contents` buttons that are not primary,
+  blue, deep-purple, red, icon, or FAB buttons.
+- The content-area Secondary button now has a white surface, subtle gray border, and
+  hover border/background treatment instead of looking like plain text.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `219/219`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js Secondary button computes to `inline-flex`, height `34px`, padding
+  `0px 14px`, background `rgb(255, 255, 255)`, and border
+  `1px rgb(215, 220, 227)`: Passed.
+- Rule remains scoped to `.v-main .contents`: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+### 2026-06-22 - Content Button Hover Behavior Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Made article content `.v-btn` controls use `cursor: pointer`.
+- Disabled inherited article-link hover underline on content buttons, so button links
+  behave visually like buttons rather than text links.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `220/220`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js content button hover computes `cursor: pointer`: Passed.
+- Real Wiki.js content button hover computes `text-decoration: none`: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+### 2026-06-22 - Editor Toolbar Sample Save Contrast Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Fixed the primary Save button foreground in the article editor-toolbar sample and
+  the real Markdown editor toolbar.
+- Added scoped rules so `.editor-markdown-toolbar .v-btn.primary` and its content
+  use the inverse/white foreground, while neutral toolbar buttons remain dark.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `222/222`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js editor toolbar sample Save button background computes to blue and text
+  computes to white: Passed, `rgb(24, 104, 219)` / `rgb(255, 255, 255)`.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+### 2026-06-22 - Content Button Row Spacing Fix
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Added scoped margin to card paragraph buttons in `.v-main .contents`, because real
+  Wiki.js renders the sample button row as inline anchor buttons inside a paragraph
+  rather than the static preview's `.button-row` flex container.
+- The row now has breathing room between adjacent buttons and wraps with bottom
+  spacing.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `223/223`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js card buttons compute `margin: 0px 4px 8px 0px`: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+
+### 2026-06-22 - Restore CodeBlock Copy Button Function
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+
+Completed:
+
+- Reverted the last-resort rule that globally forced CodeBlock Copy controls to
+  `pointer-events: none !important`.
+- Restored the intended behavior: hidden toolbar does not take events, but when the
+  CodeBlock is hovered/focused, the real Prism Copy button becomes clickable.
+- Left the manual text-selection issue open for separate investigation instead of
+  continuing blind CSS changes.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `222/222`.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Wiki.js Copy button computes `pointer-events: auto`, `cursor: pointer`, and
+  `display: inline-flex` when hovered: Passed.
+- Real Wiki.js hit-test on the Copy icon area finds the real `BUTTON`: Passed.
+
+Verification:
+
+- Used Chrome DevTools Protocol against the real Wiki.js tab on `127.0.0.1:3001`.
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
 
 - `wiki.css` must be treated as a selector map, not a design source.
 - Red line from user: generated deliverables must strictly follow Wiki.js custom CSS
@@ -1001,4 +2172,7 @@ Known risks:
   a custom theme package or source-code patch.
 - `preview.html` is only for local validation and must not become a runtime requirement.
 - Keep main context clean by delegating independent investigation or verification work.
+- Investigation default is now stricter: broad audits, runtime source exploration,
+  visual reference analysis, and open-ended verification should go to sub-agents; main
+  thread keeps only integration decisions and concise verification summaries.
 - Update this file after every meaningful task state change.

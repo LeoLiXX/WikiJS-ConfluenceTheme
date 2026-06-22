@@ -22,6 +22,13 @@ This file is binding for future work in this repository.
 ## 2. Context Hygiene
 
 - Keep the main context focused on decisions, integration, and final verification.
+- Investigation default: do not perform broad selector audits, runtime source
+  exploration, reference visual analysis, or open-ended verification in the main
+  thread when it can be delegated. Use sub-agents for those tasks and bring back only
+  concise conclusions, cited files/lines, risks, and convergence recommendations.
+- Main-thread investigation is allowed only when it is narrow, directly necessary for
+  integration, or needed to verify a just-made change. Keep those checks brief and do
+  not paste large exploratory output into the main context.
 - Delegate independent investigation or execution tasks to sub-agents when they can be
   completed without depending on active main-thread reasoning.
 - Do not delegate vague tasks. Each delegated task must have:

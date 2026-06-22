@@ -9,6 +9,10 @@ This repository also has an ignored runtime folder for a real local Wiki.js inst
 - Database: SQLite at `.runtime/wikijs-win/data/wiki.sqlite`
 - URL: `http://127.0.0.1:3001/`
 - Validation page: `http://127.0.0.1:3001/en/theme-test`
+- Full preview restoration page: `http://127.0.0.1:3001/en/theme-preview`
+  - This page includes one local validation comment for checking the Comments area.
+- Folder hierarchy validation page:
+  `http://127.0.0.1:3001/en/training-home/confluence-wiki-new-user-quick-start`
 - Admin theme screen: `http://127.0.0.1:3001/a/theme`
 
 Credentials are stored in:
@@ -37,6 +41,18 @@ The server should listen on `127.0.0.1:3001`.
 
 The same operation can be done through Wiki.js GraphQL `theming.setConfig`, which
 stores the CSS in the Wiki.js theming `injectCSS` setting.
+
+## Navigation Validation
+
+The local instance uses Wiki.js navigation mode `MIXED`.
+
+- `MIXED` preserves the native Home button and Browse/Main Menu toggle in the left
+  sidebar.
+- Browse mode shows the Wiki.js generated page tree and Current Directory list.
+- `TREE` shows the page tree directly, but it removes the Home/Browse shortcut area in
+  the default Wiki.js theme.
+- Static navigation items are flat in Wiki.js 2.5.x; nested folders/pages come from
+  real page paths, not from static navigation config.
 
 ## Boundary
 
