@@ -22,6 +22,8 @@
   --wiki-code-block-bg: #f7f8f9;
   --wiki-code-text: #0f172a;
   --wiki-code-border: #dcdfe4;
+  --wiki-code-selection-bg: #c1c7d0;
+  --wiki-code-selection-text: #172b4d;
   --wiki-table-head-bg: #f7f8f9;
   --wiki-info-bg: #e9f2ff;
   --wiki-info-border: #1d7afc;
@@ -1040,8 +1042,8 @@
 #root .v-application .v-main .contents .prismjs *::selection,
 #root .v-application .v-main .comments-post-content pre::selection,
 #root .v-application .v-main .comments-post-content pre *::selection {
-  background-color: Highlight !important;
-  color: HighlightText !important;
+  background-color: var(--wiki-code-selection-bg) !important;
+  color: var(--wiki-code-selection-text) !important;
   text-shadow: none !important;
 }
 
@@ -1051,8 +1053,8 @@
 #root .v-application .v-main .contents .prismjs *::-moz-selection,
 #root .v-application .v-main .comments-post-content pre::-moz-selection,
 #root .v-application .v-main .comments-post-content pre *::-moz-selection {
-  background-color: Highlight !important;
-  color: HighlightText !important;
+  background-color: var(--wiki-code-selection-bg) !important;
+  color: var(--wiki-code-selection-text) !important;
   text-shadow: none !important;
 }
 

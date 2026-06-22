@@ -2194,9 +2194,10 @@ Completed:
   mechanics.
 - Added scoped `::selection` / `::-moz-selection` rules for article CodeBlocks and
   comment CodeBlocks so Prism token colors cannot hide the selected range.
-- Changed the CodeBlock selected range to system `Highlight` / `HighlightText` colors
-  so it matches normal browser text selection more closely than the earlier custom
-  pale-blue block.
+- Tried system `Highlight` / `HighlightText` colors, but they stayed blue when the
+  browser lost focus and looked too different from normal inactive selection.
+- Settled on a neutral gray CodeBlock selection token so selected code stays visible
+  without the earlier heavy blue active-state mismatch.
 - Fixed right-bottom speed-dial secondary FABs by giving default white FABs a dark icon
   color, while keeping the blue edit FAB and red destructive FAB on white foregrounds.
 
@@ -2211,5 +2212,5 @@ Convergence checks:
 Verification:
 
 - Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
-- Manual visual verification requested for the system-native selection appearance,
-  because the mismatch was a user-visible selection highlight issue.
+- Manual visual verification accepted the neutral gray selection as usable, while not
+  perfectly matching the browser's native active/inactive selection behavior.
