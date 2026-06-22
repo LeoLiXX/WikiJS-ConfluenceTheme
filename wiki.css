@@ -5,6 +5,7 @@
   --wiki-surface-hover: #f4f5f7;
   --wiki-surface-active: #e9f2ff;
   --wiki-text: #292a2e;
+  --wiki-text-inverse: #ffffff;
   --wiki-heading: #172b4d;
   --wiki-muted: #6b6e76;
   --wiki-border: #dcdfe4;
@@ -14,7 +15,9 @@
   --wiki-primary-active: #1558bc;
   --wiki-focus: #388bff;
   --wiki-code-bg: #f1f2f4;
+  --wiki-code-block-bg: #f7f8f9;
   --wiki-code-text: #172b4d;
+  --wiki-code-border: #dcdfe4;
   --wiki-table-head-bg: #f7f8f9;
   --wiki-info-bg: #e9f2ff;
   --wiki-info-border: #1d7afc;
@@ -56,13 +59,77 @@
   caret-color: var(--wiki-primary) !important;
 }
 
+#root .v-application .v-btn:not(.v-btn--icon):not(.v-btn--fab) {
+  border-radius: var(--wiki-radius);
+  box-shadow: none;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#root .v-application .v-btn:not(.v-btn--icon):not(.v-btn--fab):not(.primary):not(.red):not(.blue):not(.deep-purple) {
+  color: var(--wiki-text) !important;
+}
+
+#root .v-application .v-btn:not(.v-btn--icon):not(.v-btn--fab):not(.primary):not(.red):not(.blue):not(.deep-purple):hover {
+  background-color: var(--wiki-surface-hover) !important;
+}
+
+#root .v-application .v-btn .v-btn__content,
+#root .v-application .v-btn .v-icon {
+  color: inherit;
+}
+
+#root .v-application .v-btn.primary,
+#root .v-application .v-btn.blue.darken-2,
+#root .v-application .v-btn.deep-purple {
+  background-color: var(--wiki-primary) !important;
+  border-color: var(--wiki-primary) !important;
+  color: var(--wiki-text-inverse) !important;
+}
+
+#root .v-application .v-btn.primary:hover,
+#root .v-application .v-btn.blue.darken-2:hover,
+#root .v-application .v-btn.deep-purple:hover {
+  background-color: var(--wiki-primary-hover) !important;
+  border-color: var(--wiki-primary-hover) !important;
+}
+
+#root .v-application .v-btn.primary:active,
+#root .v-application .v-btn.blue.darken-2:active,
+#root .v-application .v-btn.deep-purple:active {
+  background-color: var(--wiki-primary-active) !important;
+  border-color: var(--wiki-primary-active) !important;
+}
+
+#root .v-application .v-btn.red {
+  background-color: var(--wiki-danger-border) !important;
+  border-color: var(--wiki-danger-border) !important;
+  color: var(--wiki-text-inverse) !important;
+}
+
 #root .v-application .v-main {
   background-color: var(--wiki-bg) !important;
 }
 
 #root .v-application .v-card,
 #root .v-application .v-sheet {
+  background-color: var(--wiki-surface);
+  border: 1px solid var(--wiki-border-subtle);
   border-color: var(--wiki-border-subtle);
+  border-radius: var(--wiki-radius);
+  box-shadow: none;
+  color: var(--wiki-text);
+}
+
+#root .v-application .v-card .v-card__title,
+#root .v-application .v-card .v-card__subtitle {
+  color: var(--wiki-heading);
+  letter-spacing: 0;
+}
+
+#root .v-application .v-card .v-card__subtitle {
+  color: var(--wiki-muted);
 }
 
 #root .v-application .v-toolbar__title .subheading {
@@ -343,6 +410,21 @@
   margin: 24px 0;
 }
 
+#root .v-application .v-main .contents pre,
+#root .v-application .v-main .contents .prismjs {
+  background-color: var(--wiki-code-block-bg);
+  border: 1px solid var(--wiki-code-border);
+  border-radius: var(--wiki-radius);
+  color: var(--wiki-code-text);
+  font-family: var(--wiki-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 16px 0 20px;
+  overflow-x: auto;
+  padding: 14px 16px;
+  white-space: pre;
+}
+
 #root .v-application .v-main .contents code {
   background-color: var(--wiki-code-bg);
   border-radius: var(--wiki-radius-sm);
@@ -352,10 +434,14 @@
   padding: 0.12em 0.34em;
 }
 
+#root .v-application .v-main .contents pre code,
 #root .v-application .v-main .contents .prismjs code {
   background-color: transparent;
+  border-radius: 0;
   color: inherit;
+  font-size: inherit;
   padding: 0;
+  white-space: inherit;
 }
 
 #root .v-application .v-main .contents blockquote {
@@ -367,9 +453,17 @@
   padding: 12px 16px;
 }
 
+#root .v-application .v-main .contents blockquote > :last-child {
+  margin-bottom: 0;
+}
+
 #root .v-application .v-main .contents blockquote.is-info {
   background-color: var(--wiki-info-bg);
   border-left-color: var(--wiki-info-border);
+}
+
+#root .v-application .v-main .contents blockquote.is-info::before {
+  color: var(--wiki-info-border);
 }
 
 #root .v-application .v-main .contents blockquote.is-warning {
@@ -377,9 +471,17 @@
   border-left-color: var(--wiki-warning-border);
 }
 
+#root .v-application .v-main .contents blockquote.is-warning::before {
+  color: var(--wiki-warning-border);
+}
+
 #root .v-application .v-main .contents blockquote.is-danger {
   background-color: var(--wiki-danger-bg);
   border-left-color: var(--wiki-danger-border);
+}
+
+#root .v-application .v-main .contents blockquote.is-danger::before {
+  color: var(--wiki-danger-border);
 }
 
 #root .v-application .v-main .contents blockquote.is-success {
@@ -387,18 +489,30 @@
   border-left-color: var(--wiki-success-border);
 }
 
-#root .v-application .v-main .contents blockquote::before,
-#root .v-application .v-main .contents blockquote.is-info::before,
-#root .v-application .v-main .contents blockquote.is-warning::before,
-#root .v-application .v-main .contents blockquote.is-danger::before,
 #root .v-application .v-main .contents blockquote.is-success::before {
+  color: var(--wiki-success-border);
+}
+
+#root .v-application .v-main .contents blockquote::before {
   color: var(--wiki-heading);
+}
+
+#root .v-application .v-main .contents .table-responsive,
+#root .v-application .v-main .contents .v-data-table {
+  overflow-x: auto;
 }
 
 #root .v-application .v-main .contents table {
   border-collapse: collapse;
+  color: var(--wiki-text);
+  font-size: 14px;
   margin: 16px 0 24px;
+  min-width: 560px;
   width: 100%;
+}
+
+#root .v-application .v-main .contents thead {
+  background-color: var(--wiki-table-head-bg);
 }
 
 #root .v-application .v-main .contents th,
@@ -415,10 +529,31 @@
   font-weight: 600;
 }
 
+#root .v-application .v-main .contents tbody tr:hover {
+  background-color: var(--wiki-surface-hover);
+}
+
 #root .v-application .editor-markdown .editor-markdown-toolbar {
   background-color: var(--wiki-surface) !important;
   border-bottom: 1px solid var(--wiki-border-subtle);
   box-shadow: none;
+}
+
+#root .v-application .editor-markdown .editor-markdown-toolbar .v-btn,
+#root .v-application .editor-markdown .editor-markdown-toolbar .v-icon {
+  color: var(--wiki-text) !important;
+}
+
+#root .v-application .editor-markdown .editor-markdown-toolbar .v-btn:hover {
+  background-color: var(--wiki-surface-hover) !important;
+}
+
+#root .v-application .v-speed-dial {
+  z-index: 8;
+}
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab {
+  box-shadow: var(--wiki-shadow-overlay) !important;
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit {
@@ -427,9 +562,19 @@
   color: var(--wiki-surface) !important;
 }
 
+#root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit:hover {
+  background-color: var(--wiki-primary-hover) !important;
+  border-color: var(--wiki-primary-hover) !important;
+}
+
 #root .v-application .v-speed-dial .v-btn.v-btn--fab.red {
   background-color: var(--wiki-danger-border) !important;
   border-color: var(--wiki-danger-border) !important;
+}
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab .v-icon,
+#root .v-application .v-speed-dial .v-btn.v-btn--fab .v-btn__content {
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application.theme--dark {
@@ -444,6 +589,8 @@
   --wiki-border: #454f59;
   --wiki-border-subtle: #38414a;
   --wiki-code-bg: #2c333a;
+  --wiki-code-block-bg: #22272b;
+  --wiki-code-border: #454f59;
   --wiki-code-text: #f1f2f4;
   --wiki-table-head-bg: #2c333a;
   --wiki-info-bg: #092957;
@@ -466,5 +613,11 @@
   #root .v-application .v-main .contents {
     font-size: 14px;
     max-width: 100%;
+  }
+
+  #root .v-application .v-main .contents table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
   }
 }

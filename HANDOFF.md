@@ -25,8 +25,8 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | T2 | Theme Foundation | Completed |
 | T3 | Global Layout And Shell | Completed |
 | T4 | Article Typography | Completed |
-| T5 | Rich Content Components | Pending |
-| T6 | Floating Actions And Common Controls | Pending |
+| T5 | Rich Content Components | Completed |
+| T6 | Floating Actions And Common Controls | Completed |
 | T7 | Local Preview Implementation | Pending |
 | T8 | Documentation For Local Validation | Pending |
 | T9 | Local Verification | Pending |
@@ -566,8 +566,110 @@ Known risks:
   compatibility but should be watched in real Wiki.js testing.
 - `.v-input__slot`, `.v-list-group__header__*`, and scrollbar selectors are
   Vuetify/internal or implementation-sensitive selectors.
-- T5/T6 still need dedicated polish for rich content components, callouts, tables,
-  code blocks, editor toolbar, buttons, and floating actions.
+- T5/T6 still needed dedicated polish at this checkpoint; this was later resolved by
+  the T5/T6 task.
+
+### 2026-06-22 - T5/T6 Rich Content And Controls
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Completed:
+
+- Delegated a read-only rich components/control checklist to sub-agent `Hilbert`.
+- Polished tables, inline code, code blocks, blockquotes/callouts, cards/panels,
+  Vuetify buttons, editor toolbar, and speed-dial/FAB controls.
+- Added tokens for inverse text, code block background, and code block border.
+- Added neutral and primary button treatment with hover/active states.
+- Added card/sheet surface, border, radius, title, and subtitle styling.
+- Added code block and Prism container styling with horizontal overflow handling.
+- Added callout status pseudo-element colors for info, warning, danger, and success.
+- Added table head, cell, hover, minimum width, and narrow viewport overflow behavior.
+- Added editor toolbar button/icon polish.
+- Added FAB shadow, primary hover, danger action, icon/text contrast, and z-index note.
+- Kept `preview.html` deferred to T7.
+
+Implemented selector areas:
+
+- Rich content:
+  - `.v-main .contents pre`
+  - `.v-main .contents .prismjs`
+  - `.v-main .contents pre code`
+  - `.v-main .contents .prismjs code`
+  - `.v-main .contents blockquote`
+  - `.v-main .contents blockquote.is-info`
+  - `.v-main .contents blockquote.is-warning`
+  - `.v-main .contents blockquote.is-danger`
+  - `.v-main .contents blockquote.is-success`
+  - `.v-main .contents table`, `thead`, `tbody tr:hover`, `th`, `td`
+  - `.v-main .contents .table-responsive`
+  - `.v-main .contents .v-data-table`
+- Cards/panels:
+  - `.v-card`
+  - `.v-sheet`
+  - `.v-card__title`
+  - `.v-card__subtitle`
+- Buttons and common controls:
+  - `.v-btn:not(.v-btn--icon):not(.v-btn--fab)`
+  - `.v-btn.primary`
+  - `.v-btn.blue.darken-2`
+  - `.v-btn.deep-purple`
+  - `.v-btn.red`
+  - `.v-btn__content`
+  - `.v-icon`
+  - `:hover`, `:active`, and existing `:focus-visible`
+- Editor/FAB:
+  - `.editor-markdown .editor-markdown-toolbar`
+  - `.editor-markdown-toolbar .v-btn`
+  - `.editor-markdown-toolbar .v-icon`
+  - `.v-speed-dial`
+  - `.v-speed-dial .v-btn.v-btn--fab`
+  - `.v-speed-dial .v-btn.v-btn--fab.btn-animate-edit`
+  - `.v-speed-dial .v-btn.v-btn--fab.red`
+
+T5 convergence checks:
+
+- Tables, inline code, code blocks, cards/panels, buttons, and action controls are
+  consistent with the theme: Passed.
+- Info, warning, success, and danger callouts are styled with restrained status colors:
+  Passed.
+- Components no longer resemble the old teal styling: Passed.
+- CSS remains installable as Wiki.js custom CSS: Passed.
+- No generated CSS depends on unsupported scripts, generated markup, or imagined
+  Wiki.js extension points: Passed.
+
+T6 convergence checks:
+
+- Floating buttons use the selected blue accent and fit the documentation UI: Passed.
+- Hover, focus, and active states are restrained and readable: Passed.
+- Buttons include responsive-friendly sizing and do not introduce layout dependencies:
+  Passed by CSS review; visual overlap to be verified in T7/T9 preview.
+- Z-index/mobile concerns recorded: Passed, `.v-speed-dial` uses `z-index: 8` and
+  preview verification remains pending.
+
+Verification:
+
+- Sub-agent `Hilbert` provided a read-only T5/T6 checklist.
+- Ran grep checks against `wiki.css` for old colors and patterns:
+  - `#70c7ba`, `#42a999`, `#4bb9a8`, `#3b9689`, `#49eacb`, `#a4f5e5`,
+    `#108a73`, `#70C7BA`, `#231f20`: no matches.
+  - `uppercase`, `capitalize`, `linear-gradient`, `border-image`, `dashed`: no
+    matches.
+  - `theme package`, `plugin`, `build`, `database`, `migration`, `admin screen`,
+    `configuration interface`: no matches in `wiki.css`.
+- Checked CSS brace balance: `opens=91 closes=91`.
+- Confirmed T5/T6 selector coverage with `rg` for `table`, `pre`, `prismjs`,
+  `blockquote`, status callouts, `v-btn`, `v-speed-dial`, `btn-animate-edit`,
+  `editor-markdown-toolbar`, and `focus-visible`.
+
+Known risks:
+
+- Visual overlap, table overflow behavior, and FAB positioning still need browser
+  verification in T7/T9 once `preview.html` exists.
+- Broad Vuetify button/color selectors remain scoped to `#root .v-application`, but
+  should still be watched in a live Wiki.js instance.
 
 ## Active Notes
 
