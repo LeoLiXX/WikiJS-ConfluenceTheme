@@ -1,0 +1,274 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap);
+#root .v-application .editor-markdown .editor-markdown-toolbar {
+  background-image: linear-gradient(180deg,#70c7ba,#42a999)
+}
+#root .v-application {
+  font: normal normal 16px "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+}
+#root .v-application .primary {
+  background-color: #70c7ba!important;
+  border-color: #70c7ba!important
+}
+#root .v-application .primary--text {
+  color: #70c7ba!important;
+  caret-color: #70C7BA!important
+}
+#root .v-application .v-toolbar__title .subheading {
+  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px
+}
+#root .v-application .nav-header .v-toolbar.v-sheet,
+#root .v-application .nav-header.v-app-bar.v-app-bar {
+  background-color: #231f20!important
+}
+#root .v-application .nav-header .v-toolbar.v-sheet .v-input__slot,
+#root .v-application .nav-header.v-app-bar.v-app-bar .v-input__slot {
+  background-color: #000
+}
+#root .v-application .blue.darken-2 {
+  background-color: #4bb9a8!important
+}
+#root .v-application .blue.darken-3 {
+  background-color: #3b9689!important
+}
+#root .v-application .deep-purple {
+  background-color: #3b9689!important;
+  border-color: #3b9689!important
+}
+#root .v-application .v-navigation-drawer .__bar-wrap-is-vertical .__bar-is-vertical {
+  background-color: #70c7ba!important
+}
+#root .v-application .v-navigation-drawer .v-list.primary {
+  background-color: #231f20!important
+}
+#root .v-application .v-navigation-drawer,
+#root .v-application .v-navigation-drawer .v-list.primary,
+#root .v-application .v-navigation-drawer .v-navigation-drawer__content,
+#root .v-application .v-navigation-drawer .v-sheet {
+  background-color: #fff!important
+}
+#root .v-application .v-navigation-drawer,
+#root .v-application .v-navigation-drawer .v-icon,
+#root .v-application .v-navigation-drawer .v-list-group__header,
+#root .v-application .v-navigation-drawer .v-list-group__header__append-icon,
+#root .v-application .v-navigation-drawer .v-list-group__header__content,
+#root .v-application .v-navigation-drawer .v-list-group__header__prepend-icon,
+#root .v-application .v-navigation-drawer .v-list-item,
+#root .v-application .v-navigation-drawer .v-list-item__subtitle,
+#root .v-application .v-navigation-drawer .v-list-item__title,
+#root .v-application .v-navigation-drawer .v-list.primary,
+#root .v-application .v-navigation-drawer .v-subheader {
+  color: #111!important;
+  caret-color: #111!important
+}
+#root .v-application .v-navigation-drawer .v-btn,
+#root .v-application .v-navigation-drawer .v-btn.blue,
+#root .v-application .v-navigation-drawer .v-btn.darken-2,
+#root .v-application .v-navigation-drawer .v-btn.darken-3,
+#root .v-application .v-navigation-drawer .v-btn.primary {
+  background-color: #fff!important;
+  border-color: #fff!important;
+  box-shadow: none!important;
+  color: #111!important
+}
+#root .v-application .v-navigation-drawer .v-btn .v-btn__content,
+#root .v-application .v-navigation-drawer .v-btn .v-icon {
+  color: #111!important;
+  caret-color: #111!important
+}
+#root .v-application .v-navigation-drawer .v-divider {
+  border-color: #d0d0d0!important;
+  background-color: #d0d0d0!important
+}
+#root .v-application .v-navigation-drawer .v-list-item--active,
+#root .v-application .v-navigation-drawer .v-list-item--active:hover,
+#root .v-application .v-navigation-drawer .v-list-item:hover {
+  background-color: #d6d6d6!important;
+  color: #111!important
+}
+#root .v-application .v-navigation-drawer .v-list-item--active::before,
+#root .v-application .v-navigation-drawer .v-list-item--active:hover::before,
+#root .v-application .v-navigation-drawer .v-list-item:hover::before {
+  opacity: 0!important
+}
+#root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit {
+  background-color: #70c7ba!important
+}
+#root .v-application .v-speed-dial .v-btn.v-btn--fab.red {
+  background-color: #dd2e44!important
+}
+#root .v-application .page-header-section .headline {
+  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #231f20
+}
+#root .v-application .page-header-section .caption {
+  color: #909090!important
+}
+#root .v-application .v-main .contents h1,
+#root .v-application .v-main .contents h2,
+#root .v-application .v-main .contents h3,
+#root .v-application .v-main .contents h4,
+#root .v-application .v-main .contents h5 {
+  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #231f20;
+  margin-top: 2rem
+}
+#root .v-application .v-main .contents h1::after,
+#root .v-application .v-main .contents h2::after,
+#root .v-application .v-main .contents h3::after,
+#root .v-application .v-main .contents h4::after,
+#root .v-application .v-main .contents h5::after {
+  display: none
+}
+#root .v-application .v-main .contents h1 {
+  color: #70c7ba;
+  margin-top: 3.5rem
+}
+#root .v-application .v-main .contents h1:first-child {
+  margin-top: 0
+}
+#root .v-application .v-main .contents h2 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  border-width: 0;
+  border-bottom-width: .125rem;
+  border-style: solid;
+  border-image: linear-gradient(to right,#70C7BA,rgba(255,255,255,0)) 0 0 1 0
+}
+#root .v-application .v-main .contents h3 {
+  font-size: 1.125rem;
+  color: #6a6a6a;
+  font-family: "Inter","Microsoft YaHei","微软雅黑",-apple-system,BlinkMacSystemFont,"Noto Sans","Liberation Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Noto Sans SC","WenQuanYi Micro Hei",system-ui,sans-serif;
+  text-transform: capitalize
+}
+#root .v-application .v-main .contents h4 {
+  font-size: 1.125rem;
+  color: #b6b6b6
+}
+#root .v-application .v-main .contents h5 {
+  font-size: 1rem;
+  font-style: normal;
+  color: #b6b6b6
+}
+#root .v-application .v-main .contents a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #4bb9a8;
+  transition-property: color;
+  transition-duration: .5s
+}
+#root .v-application .v-main .contents a:focus,
+#root .v-application .v-main .contents a:hover {
+  color: #231f20;
+  border-bottom: 1px #49eacb dashed
+}
+#root .v-application .v-main .contents code {
+  background-color: #49eacb;
+  color: #231f20
+}
+#root .v-application .v-main .contents .prismjs code {
+  background-color: transparent;
+  color: #fff
+}
+#root .v-application .v-main .contents blockquote {
+  border-left-color: #231f20
+}
+#root .v-application .v-main .contents blockquote.is-info {
+  color: #231f20;
+  border-left-color: #70c7ba
+}
+#root .v-application .v-main .contents blockquote.is-info::before {
+  color: #fff
+}
+#root .v-application .v-main .contents blockquote.is-warning {
+  border-left-color: #daa039
+}
+#root .v-application .v-main .contents blockquote.is-warning::before {
+  color: #fff
+}
+#root .v-application .v-main .contents blockquote.is-danger {
+  border-left-color: #dd2e44
+}
+#root .v-application .v-main .contents blockquote.is-danger::before {
+  color: #fff
+}
+#root .v-application .v-main .contents blockquote.is-success {
+  border-left-color: #49eacb;
+  background-color: #a4f5e5;
+  color: #108a73
+}
+#root .v-application .v-main .contents blockquote.is-success::before {
+  color: #fff
+}
+#root .v-application .v-footer a {
+  text-decoration: none;
+  color: #4bb9a8
+}
+#root .v-application.theme--dark .v-main .contents h2 {
+  color: #77efd8
+}
+#root .v-application.theme--dark .v-main .contents h3 {
+  color: #a4f5e5
+}
+#root .v-application.theme--dark .v-main .contents h4 {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents h5 {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents a {
+  color: #70c7ba
+}
+#root .v-application.theme--dark .v-main .contents a:focus,
+#root .v-application.theme--dark .v-main .contents a:hover {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote {
+  background-color: #282425;
+  border-left-color: #b6b6b6;
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote::before {
+  color: #231f20
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-info {
+  background-color: #102825;
+  color: #fff;
+  border-left-color: #70c7ba
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-info::before {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-warning {
+  background-color: #674913;
+  border-left-color: #bd8523
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-warning::before {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-danger {
+  background-color: #62101a;
+  border-left-color: #ba1e32
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-danger::before {
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-success {
+  border-left-color: #70c7ba;
+  background-color: #3b9689;
+  color: #fff
+}
+#root .v-application.theme--dark .v-main .contents blockquote.is-success::before {
+  color: #fff
+}
+#root .v-application.theme--dark .v-footer {
+  opacity: .75
+}
