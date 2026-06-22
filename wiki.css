@@ -1034,6 +1034,28 @@
   user-select: text !important;
 }
 
+#root .v-application .v-main .contents pre::selection,
+#root .v-application .v-main .contents pre *::selection,
+#root .v-application .v-main .contents .prismjs::selection,
+#root .v-application .v-main .contents .prismjs *::selection,
+#root .v-application .v-main .comments-post-content pre::selection,
+#root .v-application .v-main .comments-post-content pre *::selection {
+  background-color: Highlight !important;
+  color: HighlightText !important;
+  text-shadow: none !important;
+}
+
+#root .v-application .v-main .contents pre::-moz-selection,
+#root .v-application .v-main .contents pre *::-moz-selection,
+#root .v-application .v-main .contents .prismjs::-moz-selection,
+#root .v-application .v-main .contents .prismjs *::-moz-selection,
+#root .v-application .v-main .comments-post-content pre::-moz-selection,
+#root .v-application .v-main .comments-post-content pre *::-moz-selection {
+  background-color: Highlight !important;
+  color: HighlightText !important;
+  text-shadow: none !important;
+}
+
 #root .v-application .v-main .contents pre.line-numbers .line-numbers-rows,
 #root .v-application .v-main .contents .prismjs.line-numbers .line-numbers-rows {
   display: none !important;
@@ -1723,13 +1745,21 @@
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab {
+  background-color: var(--wiki-surface) !important;
+  border: 1px solid var(--wiki-border-subtle) !important;
   box-shadow: var(--wiki-shadow-overlay) !important;
+  color: var(--wiki-icon) !important;
+}
+
+#root .v-application .v-speed-dial .v-btn.v-btn--fab:hover {
+  background-color: var(--wiki-surface-hover) !important;
+  border-color: var(--wiki-border) !important;
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit {
   background-color: var(--wiki-primary) !important;
   border-color: var(--wiki-primary) !important;
-  color: var(--wiki-surface) !important;
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab.btn-animate-edit:hover {
@@ -1740,11 +1770,12 @@
 #root .v-application .v-speed-dial .v-btn.v-btn--fab.red {
   background-color: var(--wiki-danger-border) !important;
   border-color: var(--wiki-danger-border) !important;
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab .v-icon,
 #root .v-application .v-speed-dial .v-btn.v-btn--fab .v-btn__content {
-  color: var(--wiki-text-inverse) !important;
+  color: inherit !important;
 }
 
 #root .v-application .v-speed-dial .v-btn.v-btn--fab .v-icon {
