@@ -22,7 +22,7 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | --- | --- | --- |
 | T0 | Project Setup And Baseline | Completed |
 | T1 | Selector Audit | Completed |
-| T2 | Theme Foundation | Pending |
+| T2 | Theme Foundation | Completed |
 | T3 | Global Layout And Shell | Pending |
 | T4 | Article Typography | Pending |
 | T5 | Rich Content Components | Pending |
@@ -59,8 +59,8 @@ Verification:
 
 Known risks:
 
-- The SDD references a Confluence page visually, but detailed design tokens still need
-  to be finalized in T1.
+- Historical note: detailed design tokens were not finalized at SDD draft time; this was
+  later resolved by T2.
 
 ### 2026-06-22 - Git Baseline
 
@@ -312,6 +312,163 @@ Known risks:
   should be verified against a live Wiki.js instance or representative preview DOM.
 - No unsupported Wiki.js theme APIs, package formats, plugin mechanisms, build steps,
   or configuration interfaces were assumed.
+
+### 2026-06-22 - T2 Theme Foundation
+
+Files changed:
+
+- `HANDOFF.md`
+
+Completed:
+
+- Delegated Confluence/Atlassian visual reference analysis to sub-agent `Zeno`.
+- Analyzed Confluence/Atlassian documentation visual direction and Atlassian Design
+  System references.
+- Finalized a CSS-only design foundation for Wiki.js custom CSS override.
+- Defined interaction blue, neutral surfaces, text colors, borders, status colors,
+  radius, shadows, spacing, and font stacks with Chinese fallback.
+- Confirmed typography should be enterprise documentation style: sentence-case
+  headings, readable body line-height, restrained hierarchy.
+- Confirmed old teal, uppercase, decorative gradient direction must be excluded.
+
+Visual direction:
+
+- Light, documentation-first UI.
+- White article canvas with very pale gray surrounding surfaces.
+- Restrained borders and minimal shadows.
+- Blue is reserved for links, active navigation, primary actions, and focus states.
+- Navigation should feel like enterprise workspace chrome: compact, clear, and
+  hierarchy-first.
+- Content components should be practical rather than decorative.
+
+Final design tokens for implementation:
+
+```css
+--wiki-bg: #f7f8f9;
+--wiki-surface: #ffffff;
+--wiki-surface-subtle: #f1f2f4;
+--wiki-surface-hover: #f4f5f7;
+--wiki-surface-active: #e9f2ff;
+
+--wiki-text: #292a2e;
+--wiki-heading: #172b4d;
+--wiki-muted: #6b6e76;
+--wiki-border: #dcdfe4;
+--wiki-border-subtle: #ebecf0;
+
+--wiki-primary: #1868db;
+--wiki-primary-hover: #0c66e4;
+--wiki-primary-active: #1558bc;
+--wiki-focus: #388bff;
+
+--wiki-code-bg: #f1f2f4;
+--wiki-code-text: #172b4d;
+--wiki-table-head-bg: #f7f8f9;
+
+--wiki-info-bg: #e9f2ff;
+--wiki-info-border: #1d7afc;
+--wiki-success-bg: #dcfff1;
+--wiki-success-border: #22a06b;
+--wiki-warning-bg: #fff7d6;
+--wiki-warning-border: #f5cd47;
+--wiki-danger-bg: #ffeceb;
+--wiki-danger-border: #e34935;
+
+--wiki-radius-sm: 3px;
+--wiki-radius: 6px;
+--wiki-shadow-raised: 0 1px 2px rgba(9, 30, 66, 0.16);
+--wiki-shadow-overlay: 0 8px 16px rgba(9, 30, 66, 0.15);
+
+--wiki-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei",
+  "PingFang SC", "Noto Sans CJK SC", "Noto Sans", sans-serif;
+--wiki-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+  monospace;
+```
+
+Typography decisions:
+
+- Body font size target: `14px` to `15px`.
+- Body line-height target: `1.55` to `1.65`.
+- Readable article width target: roughly `760px` to `920px`.
+- Heading scale:
+  - H1: `32px` / `40px`
+  - H2: `24px` / `32px`
+  - H3: `20px` / `28px`
+  - H4: `16px` / `24px`
+  - H5: `14px` / `20px`
+- Heading weight: `600`.
+- Headings must use sentence case from content and must not force uppercase or
+  capitalize transformations.
+
+Component guidance:
+
+- App bar: white surface, subtle bottom border, restrained shadow only if needed.
+- Search: pale neutral background, blue focus border or focus ring.
+- Drawer navigation: white or pale-gray surface; active item uses pale blue fill,
+  blue text, and optional blue left accent.
+- Links: blue by default, darker blue on active/pressed, underline on hover/focus.
+- Tables: light header background, 1px borders, compact `8px` to `12px` cell padding.
+- Inline code: soft gray background, monospace text, modest radius.
+- Code blocks: pale surface, border, radius, readable `13px` mono type.
+- Callouts: soft status fills with stronger left border; avoid loud saturated panels.
+- Buttons/FAB: primary blue fill with white text; neutral secondary buttons; focus ring
+  uses `--wiki-focus`.
+
+Explicit exclusions:
+
+- Do not reuse old teal palette, teal hover underlines, teal inline-code backgrounds,
+  or teal FAB identity.
+- Do not use uppercase headings or capitalized heading styling as a theme feature.
+- Do not use decorative gradients, gradient borders, or brand-like dark header blocks.
+- Do not remap broad Vuetify utility colors as the design source unless tightly scoped
+  by Wiki.js selectors.
+- Do not import, copy, or depend on proprietary Atlassian assets.
+- Do not introduce any Wiki.js theme APIs, plugins, packages, admin workflows, build
+  steps, or runtime requirements.
+
+Reference sources:
+
+- Confluence Data Center documentation:
+  https://confluence.atlassian.com/doc/confluence-data-center-documentation-135922.html
+- Atlassian Design System color:
+  https://atlassian.design/foundations/color
+- Atlassian Design System tokens:
+  https://atlassian.design/components/tokens/all-tokens
+- Atlassian typography scale/typefaces:
+  https://atlassian.design/foundations/typography/product-typefaces-and-scale
+- Atlassian button:
+  https://atlassian.design/components/button
+- Atlassian focus ring:
+  https://atlassian.design/components/focus-ring
+- Atlassian section message:
+  https://atlassian.design/components/section-message
+- Atlassian code:
+  https://atlassian.design/components/code
+- Atlassian table:
+  https://atlassian.design/components/table
+
+Convergence checks:
+
+- Tokens cover primary blue, text, muted text, borders, surfaces, hover/active/focus,
+  code/table/callout colors, radius, shadows, spacing, and font stack: Passed.
+- Old teal palette and decorative gradient direction explicitly excluded: Passed.
+- Typography direction defined without all-caps headings: Passed.
+- Direction suitable for enterprise documentation: Passed.
+- No unsupported Wiki.js APIs, packages, plugins, build workflows, admin screens, or
+  runtime requirements invented: Passed.
+
+Verification:
+
+- Sub-agent `Zeno` read `Agent.md`, `Requirement.md`, and `HANDOFF.md`.
+- Sub-agent `Zeno` reviewed Confluence/Atlassian documentation visual references.
+- Main agent reviewed and finalized the token set for CSS-only Wiki.js override use.
+
+Known risks:
+
+- Token values are Atlassian Design System-aligned approximations for a CSS-only
+  Wiki.js override, not an exact Atlassian product clone.
+- Font stack does not import or depend on proprietary Atlassian fonts; it uses local
+  availability and open/system fallbacks.
 
 ## Active Notes
 
