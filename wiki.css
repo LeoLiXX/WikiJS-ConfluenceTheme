@@ -4,6 +4,7 @@
   --wiki-surface-subtle: #f1f2f4;
   --wiki-surface-hover: #f4f5f7;
   --wiki-surface-active: #e9f2ff;
+  --wiki-sidebar-active: #1d5fbf;
   --wiki-text: #292a2e;
   --wiki-text-inverse: #ffffff;
   --wiki-heading: #172b4d;
@@ -122,8 +123,6 @@
 #root .v-application .v-card,
 #root .v-application .v-sheet {
   background-color: var(--wiki-surface);
-  border: 1px solid var(--wiki-border-subtle);
-  border-color: var(--wiki-border-subtle);
   border-radius: var(--wiki-radius);
   box-shadow: none;
   color: var(--wiki-text);
@@ -150,9 +149,21 @@
 #root .v-application .nav-header .v-toolbar.v-sheet,
 #root .v-application .nav-header.v-app-bar.v-app-bar {
   background-color: var(--wiki-surface) !important;
-  border-bottom: 1px solid var(--wiki-border);
-  box-shadow: var(--wiki-shadow-raised) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--wiki-border-subtle) !important;
+  box-shadow: none !important;
   color: var(--wiki-heading) !important;
+}
+
+#root .v-application .nav-header .v-toolbar,
+#root .v-application .nav-header .v-sheet,
+#root .v-application .nav-header .v-toolbar__content,
+#root .v-application .nav-header .v-responsive,
+#root .v-application .nav-header .v-image,
+#root .v-application .nav-header .v-avatar,
+#root .v-application .nav-header .v-btn {
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 #root .v-application .nav-header .v-btn,
@@ -189,6 +200,13 @@
     box-shadow 120ms ease;
 }
 
+#root .v-application .nav-header .v-btn::before,
+#root .v-application .nav-header .v-btn::after,
+#root .v-application .nav-header .v-sheet::before,
+#root .v-application .nav-header .v-sheet::after {
+  opacity: 0 !important;
+}
+
 #root .v-application .nav-header .v-toolbar.v-sheet .v-input--is-focused .v-input__slot,
 #root .v-application .nav-header.v-app-bar.v-app-bar .v-input--is-focused .v-input__slot {
   background-color: var(--wiki-surface) !important;
@@ -211,6 +229,24 @@
 #root .v-application .v-navigation-drawer {
   border-right: 1px solid var(--wiki-border) !important;
   box-shadow: none !important;
+}
+
+#root .v-application .v-navigation-drawer .primary,
+#root .v-application .v-navigation-drawer .blue,
+#root .v-application .v-navigation-drawer .blue.darken-2,
+#root .v-application .v-navigation-drawer .blue.darken-3,
+#root .v-application .v-navigation-drawer .v-list.primary {
+  background-color: var(--wiki-sidebar-active) !important;
+  color: var(--wiki-text-inverse) !important;
+}
+
+#root .v-application .v-navigation-drawer .primary .v-btn,
+#root .v-application .v-navigation-drawer .blue .v-btn,
+#root .v-application .v-navigation-drawer .primary .v-icon,
+#root .v-application .v-navigation-drawer .blue .v-icon,
+#root .v-application .v-navigation-drawer .primary .v-list-item__title,
+#root .v-application .v-navigation-drawer .blue .v-list-item__title {
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .v-navigation-drawer,
@@ -258,15 +294,15 @@
 
 #root .v-application .v-navigation-drawer .v-list-item--active,
 #root .v-application .v-navigation-drawer .v-list-item--active:hover {
-  background-color: var(--wiki-surface-active) !important;
-  color: var(--wiki-primary) !important;
+  background-color: var(--wiki-sidebar-active) !important;
+  color: var(--wiki-text-inverse) !important;
   font-weight: 600;
 }
 
 #root .v-application .v-navigation-drawer .v-list-item--active .v-icon,
 #root .v-application .v-navigation-drawer .v-list-item--active .v-list-item__title,
 #root .v-application .v-navigation-drawer .v-list-item--active .v-list-item__subtitle {
-  color: var(--wiki-primary) !important;
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .v-navigation-drawer .v-list-item--active::before,
@@ -293,6 +329,14 @@
   border-color: transparent !important;
   box-shadow: none !important;
   color: var(--wiki-text) !important;
+}
+
+#root .v-application .v-navigation-drawer .primary .v-btn,
+#root .v-application .v-navigation-drawer .v-btn.primary,
+#root .v-application .v-navigation-drawer .v-btn.blue,
+#root .v-application .v-navigation-drawer .v-btn.darken-2,
+#root .v-application .v-navigation-drawer .v-btn.darken-3 {
+  color: var(--wiki-text-inverse) !important;
 }
 
 #root .v-application .v-navigation-drawer .v-btn:hover {
@@ -323,6 +367,52 @@
   color: var(--wiki-muted) !important;
   font-size: 13px;
   letter-spacing: 0;
+}
+
+#root .v-application .page-col-sd .v-card,
+#root .v-application .page-col-sd .v-sheet {
+  background-color: var(--wiki-surface) !important;
+  border: 0 !important;
+  border-radius: var(--wiki-radius);
+  box-shadow: none !important;
+}
+
+#root .v-application .page-col-sd .v-card {
+  padding-left: 10px;
+}
+
+#root .v-application .page-col-sd .v-card:not(:first-child) {
+  margin-top: 16px;
+}
+
+#root .v-application .page-col-sd .v-card::before,
+#root .v-application .page-col-sd .v-card::after,
+#root .v-application .page-col-sd .v-sheet::before,
+#root .v-application .page-col-sd .v-sheet::after {
+  opacity: 0 !important;
+}
+
+#root .v-application .page-col-sd .overline,
+#root .v-application .page-col-sd .v-subheader {
+  color: var(--wiki-muted) !important;
+  letter-spacing: 0.08em;
+}
+
+#root .v-application .page-col-sd .v-list-item,
+#root .v-application .page-col-sd .v-list-group__header {
+  border-radius: var(--wiki-radius);
+  min-height: 34px;
+}
+
+#root .v-application .page-col-sd .v-list-item:hover,
+#root .v-application .page-col-sd .v-list-group__header:hover {
+  background-color: var(--wiki-surface-hover) !important;
+}
+
+#root .v-application .page-col-sd .v-btn:not(.primary):not(.blue):not(.deep-purple):not(.red) {
+  background-color: var(--wiki-surface) !important;
+  border: 1px solid var(--wiki-border) !important;
+  color: var(--wiki-text) !important;
 }
 
 #root .v-application .v-main .contents {

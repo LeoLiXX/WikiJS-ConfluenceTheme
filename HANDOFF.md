@@ -940,6 +940,58 @@ Known risks:
 - The local instance is real Wiki.js, but it is a disposable validation environment.
   Credentials and database are intentionally stored under ignored `.runtime/`.
 
+### 2026-06-22 - Real Wiki.js Feedback: Right TOC And Reduced Frames
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Real Wiki.js theming config updated via GraphQL `theming.setConfig`.
+- `tocPosition` set to `right`.
+- Current `wiki.css` injected into Wiki.js `injectCSS`.
+
+Completed:
+
+- Moved Page Contents to the right side using Wiki.js theming `tocPosition: "right"`.
+- Removed heavy top app-bar line/frame artifacts caused by broad `.v-sheet` and
+  toolbar styling against the real Wiki.js DOM.
+- Kept the top area white and quiet with only a subtle bottom separator.
+- Updated left navigation active/blue areas so blue backgrounds use light foreground
+  text and icons.
+- Reduced right sidebar card/line-frame feel for Page Contents, Tags, Talk, Last Edited
+  and sharing areas while keeping readable grouping.
+- Preserved CSS-only delivery boundary; no Wiki.js source files or runtime templates
+  were edited.
+
+Convergence checks:
+
+- Page Contents appears on the right side in the real Wiki.js validation page: Passed.
+- Top app bar no longer shows large white framed boxes: Passed by screenshot.
+- Left blue navigation areas use light foreground: Passed by screenshot.
+- Right sidebar is visually lighter and less frame-heavy: Passed.
+- Mobile page remains readable and does not force the right TOC column: Passed.
+- CSS remains valid by brace balance check: Passed, `110/110`.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Requested `http://127.0.0.1:3001/en/theme-test`: HTTP 200, `tocPosition` right and
+  `--wiki-sidebar-active` present.
+- Generated real Wiki.js desktop screenshot:
+  - `verification/wikijs-real-theme-test-feedback3.png`
+- Generated real Wiki.js mobile screenshot:
+  - `verification/wikijs-real-theme-test-mobile-feedback3.png`
+- Manually inspected both screenshots.
+
+Known risks:
+
+- Some secondary right-sidebar action buttons, such as share/print, still retain a
+  light native button border. They are less prominent than before and can be further
+  softened in a follow-up if desired.
+
 ## Active Notes
 
 - `wiki.css` must be treated as a selector map, not a design source.
