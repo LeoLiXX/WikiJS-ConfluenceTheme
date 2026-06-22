@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wiki.js Confluence-like Theme Preview</title>
+  <link rel="stylesheet" href="./wiki.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f8f9;
+    }
+
+    .preview-shell {
+      min-height: 100vh;
+    }
+
+    .nav-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 56px;
+    }
+
+    .nav-header.v-app-bar,
+    .nav-header .v-toolbar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      height: 56px;
+      padding: 0 20px;
+    }
+
+    .v-toolbar__title {
+      min-width: 180px;
+    }
+
+    .subheading {
+      font-size: 16px;
+    }
+
+    .preview-search {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .v-input__slot {
+      align-items: center;
+      display: flex;
+      min-height: 36px;
+      padding: 0 12px;
+    }
+
+    .v-input__slot input {
+      background: transparent;
+      border: 0;
+      font: inherit;
+      outline: 0;
+      width: 100%;
+    }
+
+    .preview-body {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: calc(100vh - 56px);
+    }
+
+    .v-navigation-drawer {
+      padding: 16px 0;
+    }
+
+    .v-list {
+      margin: 0;
+      padding: 0;
+    }
+
+    .v-subheader {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 20px 6px;
+      text-transform: uppercase;
+    }
+
+    .v-list-item,
+    .v-list-group__header {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      padding: 0 12px;
+    }
+
+    .v-list-item__content {
+      min-width: 0;
+    }
+
+    .v-list-item__title {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .v-list-item__subtitle {
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .v-icon {
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-style: normal;
+      justify-content: center;
+      width: 18px;
+    }
+
+    .v-divider {
+      border: 0;
+      border-top: 1px solid;
+      margin: 12px 16px;
+    }
+
+    .v-main {
+      min-width: 0;
+      padding: 36px 44px 80px;
+    }
+
+    .page-header-section {
+      margin: 0 0 28px;
+    }
+
+    .caption {
+      margin-top: 6px;
+    }
+
+    .contents {
+      margin: 0 auto 0 0;
+    }
+
+    .v-card {
+      margin: 18px 0;
+      padding: 16px;
+    }
+
+    .v-card__title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .v-card__subtitle {
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .v-btn {
+      align-items: center;
+      border: 1px solid transparent;
+      cursor: default;
+      display: inline-flex;
+      font: inherit;
+      gap: 8px;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 14px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 4px;
+    }
+
+    .editor-markdown-toolbar {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      margin: 20px 0;
+      min-height: 44px;
+      padding: 6px 10px;
+    }
+
+    .v-speed-dial {
+      bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: fixed;
+      right: 24px;
+    }
+
+    .v-btn--fab {
+      border-radius: 999px;
+      height: 48px;
+      padding: 0;
+      width: 48px;
+    }
+
+    .v-footer {
+      margin-top: 48px;
+      padding: 20px 0 0;
+    }
+
+    @media (max-width: 900px) {
+      .preview-body {
+        grid-template-columns: 1fr;
+      }
+
+      .v-navigation-drawer {
+        display: none;
+      }
+
+      .v-main {
+        padding: 24px 18px 96px;
+      }
+
+      .nav-header.v-app-bar,
+      .nav-header .v-toolbar {
+        padding: 0 12px;
+      }
+
+      .v-toolbar__title {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="v-application preview-shell">
+      <header class="nav-header v-app-bar v-app-bar">
+        <div class="v-toolbar v-sheet">
+          <div class="v-toolbar__title">
+            <span class="subheading">Knowledge Space</span>
+          </div>
+          <div class="preview-search v-input v-input--is-focused">
+            <div class="v-input__slot">
+              <span class="v-icon">⌕</span>
+              <input value="Search documentation">
+            </div>
+          </div>
+          <button class="v-btn primary"><span class="v-btn__content">Create</span></button>
+        </div>
+      </header>
+
+      <div class="preview-body">
+        <aside class="v-navigation-drawer">
+          <div class="v-navigation-drawer__content">
+            <div class="v-list primary">
+              <div class="v-subheader">Space navigation</div>
+              <div class="v-list-item v-list-item--active">
+                <span class="v-icon">▣</span>
+                <div class="v-list-item__content">
+                  <div class="v-list-item__title">Confluence-like theme</div>
+                  <div class="v-list-item__subtitle">Current page</div>
+                </div>
+              </div>
+              <div class="v-list-item">
+                <span class="v-icon">▢</span>
+                <div class="v-list-item__content">
+                  <div class="v-list-item__title">Getting started</div>
+                  <div class="v-list-item__subtitle">Overview and setup</div>
+                </div>
+              </div>
+              <div class="v-list-group__header">
+                <span class="v-list-group__header__prepend-icon v-icon">▸</span>
+                <span class="v-list-group__header__content">Administration</span>
+                <span class="v-list-group__header__append-icon v-icon">⌄</span>
+              </div>
+              <div class="v-list-item">
+                <span class="v-icon">▢</span>
+                <div class="v-list-item__content">
+                  <div class="v-list-item__title">Custom CSS</div>
+                  <div class="v-list-item__subtitle">Override surface only</div>
+                </div>
+              </div>
+              <hr class="v-divider">
+              <button class="v-btn">
+                <span class="v-icon">＋</span>
+                <span class="v-btn__content">New page</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <main class="v-main">
+          <section class="page-header-section">
+            <div class="headline">Confluence-like Wiki.js theme preview</div>
+            <div class="caption">Updated today · Local static preview · CSS override only</div>
+          </section>
+
+          <article class="contents">
+            <h1>Theme foundation</h1>
+            <p>
+              This page exercises the custom <code>wiki.css</code> selectors using a
+              representative Wiki.js-like structure. It is a local validation aid, not
+              a Wiki.js runtime component.
+            </p>
+            <p>
+              Links should use a calm Atlassian-like blue and become underlined on
+              hover or focus. For example, read the
+              <a href="https://confluence.atlassian.com/doc/confluence-data-center-documentation-135922.html">reference documentation</a>.
+            </p>
+
+            <h2>Navigation and page structure</h2>
+            <p>The shell should feel like a compact enterprise documentation workspace.</p>
+            <ul>
+              <li>White app bar with subtle border and restrained shadow.</li>
+              <li>Left navigation with pale active state and clear hierarchy.</li>
+              <li>Readable article width for long-form technical content.</li>
+            </ul>
+            <ol>
+              <li>Copy the CSS into the Wiki.js custom CSS override area.</li>
+              <li>Review navigation, article content, and technical blocks.</li>
+              <li>Keep this preview as a local validation aid only.</li>
+            </ol>
+
+            <h3>Table treatment</h3>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Area</th>
+                    <th>Selector family</th>
+                    <th>Expected result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Navigation</td>
+                    <td><code>.v-navigation-drawer</code></td>
+                    <td>Light surface, subtle active blue, readable labels.</td>
+                  </tr>
+                  <tr>
+                    <td>Article</td>
+                    <td><code>.v-main .contents</code></td>
+                    <td>Sentence-case headings and comfortable line height.</td>
+                  </tr>
+                  <tr>
+                    <td>Controls</td>
+                    <td><code>.v-btn</code> / <code>.v-speed-dial</code></td>
+                    <td>Blue primary actions, neutral secondary actions.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Code and callouts</h3>
+            <p>Inline code such as <code>python -m http.server 4173</code> should remain quiet.</p>
+            <pre class="prismjs"><code>/* Wiki.js custom CSS override */
+#root .v-application .v-main .contents h2 {
+  border-bottom: 1px solid var(--wiki-border-subtle);
+}</code></pre>
+
+            <blockquote class="is-info">
+              <p>Info callout: use soft blue fill and a clear left border.</p>
+            </blockquote>
+            <blockquote class="is-warning">
+              <p>Warning callout: keep the tone visible without becoming loud.</p>
+            </blockquote>
+            <blockquote class="is-danger">
+              <p>Danger callout: reserve red for destructive or high-risk information.</p>
+            </blockquote>
+            <blockquote class="is-success">
+              <p>Success callout: use green as confirmation, not as the main brand color.</p>
+            </blockquote>
+
+            <h4>Cards, panels, and buttons</h4>
+            <div class="v-card v-sheet">
+              <div class="v-card__title">Theme checkpoint</div>
+              <div class="v-card__subtitle">Representative panel using Vuetify-like classes.</div>
+              <p>The card should be quiet: white surface, subtle border, small radius, no heavy decoration.</p>
+              <div class="button-row">
+                <button class="v-btn primary"><span class="v-btn__content">Primary action</span></button>
+                <button class="v-btn blue darken-2"><span class="v-btn__content">Blue utility</span></button>
+                <button class="v-btn deep-purple"><span class="v-btn__content">Mapped utility</span></button>
+                <button class="v-btn"><span class="v-btn__content">Secondary</span></button>
+                <button class="v-btn red"><span class="v-btn__content">Danger</span></button>
+              </div>
+            </div>
+
+            <h5>Editor toolbar</h5>
+            <div class="editor-markdown">
+              <div class="editor-markdown-toolbar">
+                <button class="v-btn"><span class="v-icon">B</span></button>
+                <button class="v-btn"><span class="v-icon">I</span></button>
+                <button class="v-btn"><span class="v-icon">{ }</span></button>
+                <button class="v-btn primary"><span class="v-btn__content">Save</span></button>
+              </div>
+            </div>
+
+            <hr>
+
+            <footer class="v-footer">
+              <span>Local preview for <a href="./wiki.css">wiki.css</a>. The actual deliverable remains a CSS override.</span>
+            </footer>
+          </article>
+        </main>
+      </div>
+
+      <div class="v-speed-dial">
+        <button class="v-btn v-btn--fab btn-animate-edit"><span class="v-btn__content"><span class="v-icon">✎</span></span></button>
+        <button class="v-btn v-btn--fab red"><span class="v-btn__content"><span class="v-icon">×</span></span></button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

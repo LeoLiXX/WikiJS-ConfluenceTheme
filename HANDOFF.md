@@ -27,7 +27,7 @@ Implement a Confluence-like custom CSS theme for Wiki.js using the SDD in
 | T4 | Article Typography | Completed |
 | T5 | Rich Content Components | Completed |
 | T6 | Floating Actions And Common Controls | Completed |
-| T7 | Local Preview Implementation | Pending |
+| T7 | Local Preview Implementation | Completed |
 | T8 | Documentation For Local Validation | Pending |
 | T9 | Local Verification | Pending |
 | T10 | Final Acceptance Pass | Pending |
@@ -670,6 +670,66 @@ Known risks:
   verification in T7/T9 once `preview.html` exists.
 - Broad Vuetify button/color selectors remain scoped to `#root .v-application`, but
   should still be watched in a live Wiki.js instance.
+
+### 2026-06-22 - T7 Local Preview Implementation
+
+Files changed:
+
+- `preview.html`
+- `HANDOFF.md`
+
+Completed:
+
+- Created `preview.html` as a local validation aid that imports `wiki.css`.
+- Mocked representative Wiki.js/Vuetify DOM patterns without adding runtime
+  dependencies.
+- Covered top app bar, search input, left navigation, active nav state, grouped nav
+  header, article header, content typography, links, unordered and ordered lists,
+  table, inline code, Prism-style code block, callouts, cards/panels, buttons, editor
+  toolbar, footer, and FAB/speed-dial actions.
+- Included utility button examples for `.primary`, `.blue.darken-2`, `.deep-purple`,
+  neutral, and `.red`.
+- Kept `preview.html` explicitly scoped as validation-only and not a Wiki.js runtime
+  deliverable.
+
+Deliberate mock DOM approximations:
+
+- The page uses hand-written Vuetify/Wiki.js-like class names to exercise the CSS
+  selectors.
+- The page does not attempt to reproduce Wiki.js behavior, routing, Vue components,
+  search logic, authentication, editor behavior, or real content rendering.
+- Hover states are left to the browser; focused search is represented with
+  `.v-input--is-focused`.
+
+T7 convergence checks:
+
+- `preview.html` exists and imports `wiki.css`: Passed.
+- Preview includes top bar, search, left navigation, article header, headings, links,
+  lists, table, inline code, code block, callouts, buttons, footer, and floating
+  actions: Passed.
+- Preview can be served locally with `python -m http.server 4173`: Pending actual
+  server run in T9, but file is static and suitable for that flow.
+- Preview is useful without a live Wiki.js instance: Passed.
+- Preview is only a validation aid and does not introduce requirements that the actual
+  Wiki.js custom CSS deliverable cannot satisfy: Passed.
+
+Verification:
+
+- Sub-agent `Plato` provided a read-only T7 preview coverage checklist.
+- Ran `rg` to confirm `preview.html` imports `wiki.css`.
+- Ran `rg` to confirm core DOM/class coverage for `#root`, `.v-application`,
+  `.v-main`, `.contents`, `.nav-header`, `.v-navigation-drawer`, and
+  `.page-header-section`.
+- Ran `rg` to confirm rich/control coverage for status callouts, `.prismjs`,
+  `.table-responsive`, `.v-speed-dial`, `.btn-animate-edit`, and
+  `.editor-markdown-toolbar`.
+- Ran `rg` for unsupported mechanism terms in `preview.html`; no matches.
+- Checked rough HTML element balance: `element-opens=138 closes=138`.
+
+Known risks:
+
+- Visual correctness, responsive behavior, table overflow, and FAB overlap still need
+  browser verification in T9.
 
 ## Active Notes
 
