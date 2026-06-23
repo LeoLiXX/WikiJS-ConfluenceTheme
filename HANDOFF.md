@@ -2214,3 +2214,67 @@ Verification:
 - Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
 - Manual visual verification accepted the neutral gray selection as usable, while not
   perfectly matching the browser's native active/inactive selection behavior.
+
+### 2026-06-23 - Visual Editor Contrast Audit
+
+Files changed:
+
+- `wiki.css`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Created or reused local Wiki.js validation page
+  `/en/visual-editor-contrast-test` with the `ckeditor` editor for real Visual Editor
+  checks.
+
+Completed:
+
+- Investigated the Visual Editor screenshot issue against Wiki.js runtime source and
+  real DOM instead of guessing from the static preview.
+- Confirmed the editor shell hard-codes right-side action labels as `.white--text`
+  inside a white top nav after our theme override, making labels such as `Create`,
+  `Page`, and `Close` disappear.
+- Added editor-shell-scoped nav action overrides under
+  `#root .v-application.editor .nav-header` so green, blue, amber, red, disabled, and
+  hard-coded `.white--text` action labels/icons keep readable foreground colors on the
+  white editor header.
+- Confirmed Wiki.js' bundled Visual Editor CSS sets the CKEditor toolbar to
+  `background-color: #e0e0e0; color: #fff`, which is a second contrast risk.
+- Added Visual Editor / CKEditor toolbar overrides under `.editor-ckeditor` so the
+  toolbar uses the theme's light gray surface with dark text/icons, readable hover
+  states, and muted disabled controls.
+- Used sub-agent `Dewey` for a read-only contrast audit. Its main finding was that
+  editor toolbar and colored editor buttons needed late, scoped foreground repair;
+  this was integrated with the runtime source finding for the Visual Editor shell.
+
+Convergence checks:
+
+- CSS brace balance remains valid: Passed, `238/238`.
+- `git diff --check`: Passed.
+- Latest CSS was accepted by Wiki.js theming GraphQL mutation: Passed,
+  `Theme config updated`.
+- Real Visual Editor page loads: Passed,
+  `http://127.0.0.1:3001/e/en/visual-editor-contrast-test`.
+- Real Visual Editor top action labels are readable: Passed by CDP computed styles:
+  `Saved` text/icon `rgb(33, 110, 78)`, `Page` text/icon `rgb(24, 104, 219)`,
+  `Close` text/icon `rgb(174, 42, 25)`.
+- Real CKEditor toolbar is readable: Passed by CDP computed styles, toolbar background
+  `rgb(241, 242, 244)`, default button text `rgb(41, 42, 46)`, active button text
+  `rgb(23, 43, 77)`.
+- Change remains CSS-only under Wiki.js custom CSS selectors: Passed.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Used Chrome DevTools Protocol against the local Wiki.js instance on
+  `127.0.0.1:3001` to inspect the real Visual Editor DOM and computed styles.
+
+Notes:
+
+- The direct root cause for the screenshot was Wiki.js editor shell markup using
+  `.white--text` for labels while our theme makes `.nav-header` white.
+- The broader contrast audit found another concrete Visual Editor issue in bundled
+  `.editor-ckeditor .ck.ck-toolbar` default styling. No unsupported theme package,
+  plugin, or runtime JS mechanism was introduced.

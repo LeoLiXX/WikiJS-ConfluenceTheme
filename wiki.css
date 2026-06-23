@@ -29,10 +29,13 @@
   --wiki-info-border: #1d7afc;
   --wiki-success-bg: #dcfff1;
   --wiki-success-border: #22a06b;
+  --wiki-success-text: #216e4e;
   --wiki-warning-bg: #fff7d6;
   --wiki-warning-border: #f5cd47;
+  --wiki-warning-text: #7f5f01;
   --wiki-danger-bg: #ffeceb;
   --wiki-danger-border: #e34935;
+  --wiki-danger-text: #ae2a19;
   --wiki-radius-sm: 3px;
   --wiki-radius: 6px;
   --wiki-shadow-raised: 0 1px 2px rgba(9, 30, 66, 0.16);
@@ -473,6 +476,46 @@
 #root .v-application .nav-header .v-btn.deep-purple .v-btn__content,
 #root .v-application .nav-header .v-btn.deep-purple .v-icon {
   color: var(--wiki-text-inverse) !important;
+}
+
+#root .v-application.editor .nav-header .v-btn .white--text {
+  color: inherit !important;
+}
+
+#root .v-application.editor .nav-header .v-btn.green--text,
+#root .v-application.editor .nav-header .v-btn.green--text .v-btn__content,
+#root .v-application.editor .nav-header .v-btn.green--text .v-icon,
+#root .v-application.editor .nav-header .v-btn.green--text span {
+  color: var(--wiki-success-text) !important;
+}
+
+#root .v-application.editor .nav-header .v-btn.blue--text,
+#root .v-application.editor .nav-header .v-btn.blue--text .v-btn__content,
+#root .v-application.editor .nav-header .v-btn.blue--text .v-icon,
+#root .v-application.editor .nav-header .v-btn.blue--text span {
+  color: var(--wiki-primary) !important;
+}
+
+#root .v-application.editor .nav-header .v-btn.amber--text,
+#root .v-application.editor .nav-header .v-btn.amber--text .v-btn__content,
+#root .v-application.editor .nav-header .v-btn.amber--text .v-icon,
+#root .v-application.editor .nav-header .v-btn.amber--text span,
+#root .v-application.editor .nav-header .v-btn .amber--text {
+  color: var(--wiki-warning-text) !important;
+}
+
+#root .v-application.editor .nav-header .v-btn.red--text,
+#root .v-application.editor .nav-header .v-btn.red--text .v-btn__content,
+#root .v-application.editor .nav-header .v-btn.red--text .v-icon,
+#root .v-application.editor .nav-header .v-btn.red--text span {
+  color: var(--wiki-danger-text) !important;
+}
+
+#root .v-application.editor .nav-header .v-btn.v-btn--disabled,
+#root .v-application.editor .nav-header .v-btn.v-btn--disabled .v-btn__content,
+#root .v-application.editor .nav-header .v-btn.v-btn--disabled .v-icon,
+#root .v-application.editor .nav-header .v-btn.v-btn--disabled span {
+  color: var(--wiki-muted) !important;
 }
 
 #root .v-application .nav-header .v-toolbar.v-sheet .v-input__slot,
@@ -1742,6 +1785,45 @@
   opacity: 0 !important;
 }
 
+#root .v-application .editor-ckeditor {
+  background-color: var(--wiki-surface-subtle) !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar {
+  background-color: var(--wiki-surface-subtle) !important;
+  border: 0;
+  border-bottom: 1px solid var(--wiki-border-subtle);
+  color: var(--wiki-text) !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar__items {
+  background-color: transparent !important;
+  color: var(--wiki-text) !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button,
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button .ck-button__label,
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button .ck-icon {
+  color: var(--wiki-text) !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button .ck-icon *,
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button svg * {
+  fill: currentColor !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button:hover,
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button.ck-on {
+  background-color: var(--wiki-surface-hover) !important;
+  color: var(--wiki-heading) !important;
+}
+
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button.ck-disabled,
+#root .v-application .editor-ckeditor .ck.ck-toolbar .ck-button[aria-disabled="true"] {
+  color: var(--wiki-muted) !important;
+  opacity: 0.72;
+}
+
 #root .v-application .v-speed-dial {
   z-index: 8;
 }
@@ -1802,8 +1884,11 @@
   --wiki-table-head-bg: #2c333a;
   --wiki-info-bg: #092957;
   --wiki-success-bg: #123c2b;
+  --wiki-success-text: #7ee2b8;
   --wiki-warning-bg: #4a3511;
+  --wiki-warning-text: #f5cd47;
   --wiki-danger-bg: #4f1c16;
+  --wiki-danger-text: #ff9c8f;
 }
 
 #root .v-application.theme--dark .v-footer {
