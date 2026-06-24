@@ -2278,3 +2278,70 @@ Notes:
 - The broader contrast audit found another concrete Visual Editor issue in bundled
   `.editor-ckeditor .ck.ck-toolbar` default styling. No unsupported theme package,
   plugin, or runtime JS mechanism was introduced.
+
+### 2026-06-24 - Wide Table Layout Case
+
+Files changed:
+
+- `wiki.css`
+- `preview.html`
+- `HANDOFF.md`
+
+Runtime state changed, ignored by Git:
+
+- Current `wiki.css` re-injected into Wiki.js theming `injectCSS`.
+- Created local Wiki.js validation page:
+  `http://127.0.0.1:3001/en/wide-table-layout-test`.
+- Captured real Wiki.js verification screenshot:
+  `verification/wikijs-wide-table-layout.png`.
+
+Completed:
+
+- Built a reproducible large-table case for the user's training-plan-style table.
+- Added a 12-column wide table case to `preview.html` so local static validation covers
+  this layout regression.
+- Created the real Wiki.js page `/en/wide-table-layout-test` with a Markdown-rendered
+  training plan matrix.
+- Confirmed the real Wiki.js renderer wraps Markdown page content as
+  `.contents > div` and Markdown tables as `.table-container > table`.
+- Changed article layout from a single `920px` `.contents` max width to:
+  - wide content canvas up to `1600px`;
+  - ordinary prose elements constrained to `920px`;
+  - `.table-responsive`, `.table-container`, and `.v-data-table` using full available
+    canvas with internal horizontal scrolling.
+- Kept the right Page Contents / tags sidebar visible; no sidebar hiding or unsupported
+  Wiki.js customization was introduced.
+- Used sub-agent `Ptolemy` for read-only selector/layout investigation. Its findings
+  matched runtime checks: `.contents max-width: 920px` was the main bottleneck, and
+  real Markdown tables use `.table-container`.
+
+Convergence checks:
+
+- Wide table case exists in local static preview: Passed.
+- Real Wiki.js wide table page exists: Passed, page id `42`.
+- On 2560px desktop, table canvas expands beyond prose width: Passed, `.contents` and
+  `.table-container` measured `1600px`; first paragraph measured `920px`.
+- On 1440px desktop, the table does not collide with the right sidebar: Passed,
+  `.table-container` measured `847px` with internal `scrollWidth=1414`; document
+  `scrollWidth` stayed equal to `clientWidth` at `1425`.
+- On mobile-like width, the table remains horizontally scrollable inside the table
+  container: Passed, `.table-container` measured `358px` with internal
+  `scrollWidth=1414`.
+- Static preview also keeps prose at `920px` while the wide table uses the broader
+  canvas: Passed by CDP computed dimensions.
+- Change remains CSS-only under Wiki.js custom CSS selectors: Passed.
+
+Verification:
+
+- Re-injected CSS into real Wiki.js through GraphQL `theming.setConfig`.
+- Used Chrome DevTools Protocol against `http://127.0.0.1:3001/en/wide-table-layout-test`
+  at 2560px, 1440px, and mobile-like widths.
+- Used Chrome DevTools Protocol against `http://127.0.0.1:4173/preview.html` to verify
+  the static wide-table case.
+
+Known risks:
+
+- The fix depends on Wiki.js 2.5.x real selectors `.contents > div` and
+  `.table-container`; future Wiki.js renderer changes should be rechecked.
+- Very wide raw HTML tables outside Wiki.js' Markdown `.table-container` path may need
+  a separate selector if they appear in real content.

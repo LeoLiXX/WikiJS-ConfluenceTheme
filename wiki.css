@@ -36,6 +36,8 @@
   --wiki-danger-bg: #ffeceb;
   --wiki-danger-border: #e34935;
   --wiki-danger-text: #ae2a19;
+  --wiki-prose-max: 920px;
+  --wiki-wide-content-max: 1600px;
   --wiki-radius-sm: 3px;
   --wiki-radius: 6px;
   --wiki-shadow-raised: 0 1px 2px rgba(9, 30, 66, 0.16);
@@ -881,7 +883,49 @@
   font-family: var(--wiki-font);
   font-size: 15px;
   line-height: 1.62;
-  max-width: 920px;
+  max-width: min(100%, var(--wiki-wide-content-max));
+  width: 100%;
+}
+
+#root .v-application .v-main .contents > :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    blockquote,
+    pre,
+    div.code-toolbar,
+    hr,
+    .editor-markdown,
+    .v-card,
+    .v-sheet,
+    .v-footer
+  ),
+#root .v-application .v-main .contents > div > :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    ol,
+    blockquote,
+    pre,
+    div.code-toolbar,
+    hr,
+    .editor-markdown,
+    .v-card,
+    .v-sheet,
+    .v-footer
+  ) {
+  max-width: var(--wiki-prose-max);
 }
 
 #root .v-application .v-main .contents p,
@@ -1410,8 +1454,18 @@
 }
 
 #root .v-application .v-main .contents .table-responsive,
+#root .v-application .v-main .contents .table-container,
 #root .v-application .v-main .contents .v-data-table {
+  margin: 16px 0 24px;
+  max-width: 100%;
   overflow-x: auto;
+  width: 100%;
+}
+
+#root .v-application .v-main .contents .table-responsive > table,
+#root .v-application .v-main .contents .table-container > table,
+#root .v-application .v-main .contents .v-data-table table {
+  margin: 0;
 }
 
 #root .v-application .v-main .contents table {
@@ -1419,7 +1473,7 @@
   color: var(--wiki-text);
   font-size: 14px;
   margin: 16px 0 24px;
-  min-width: 560px;
+  min-width: max(100%, 720px);
   width: 100%;
 }
 
@@ -1912,6 +1966,7 @@
   }
 
   #root .v-application .v-main .contents .table-responsive,
+  #root .v-application .v-main .contents .table-container,
   #root .v-application .v-main .contents .v-data-table {
     max-width: 100%;
     overflow-x: auto;

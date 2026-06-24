@@ -563,6 +563,77 @@
               </table>
             </div>
 
+            <h3>Wide table layout case</h3>
+            <p>
+              This table intentionally has many columns and long cells. It should use
+              the wider document canvas on desktop while normal paragraphs stay in a
+              comfortable reading column.
+            </p>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Module</th>
+                    <th>Time (H)</th>
+                    <th>Audience</th>
+                    <th>Owner</th>
+                    <th>PPT / Path</th>
+                    <th>Exercise</th>
+                    <th>Prerequisites</th>
+                    <th>Status</th>
+                    <th>Review notes</th>
+                    <th>Follow-up</th>
+                    <th>Dependency</th>
+                    <th>Window</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Node.js fundamentals</td>
+                    <td>2</td>
+                    <td>New training engineers</td>
+                    <td>Platform Enablement</td>
+                    <td><code>\\fileshare\Training\MSEAN\ppt\Nodejs</code></td>
+                    <td>Build a CLI and inspect package scripts.</td>
+                    <td>JavaScript basics, npm basics</td>
+                    <td>Ready</td>
+                    <td>Keep examples close to internal service conventions.</td>
+                    <td>Training PM</td>
+                    <td>None</td>
+                    <td>2026 Q3</td>
+                  </tr>
+                  <tr>
+                    <td>Node.js in Action: web applications</td>
+                    <td>4</td>
+                    <td>Backend developers</td>
+                    <td>Web Runtime Team</td>
+                    <td><code>\\fileshare\Training\MSEAN\ppt\NodeWeb</code></td>
+                    <td>Implement route, middleware, error handler, and logging.</td>
+                    <td>HTTP basics, REST conventions</td>
+                    <td>Draft</td>
+                    <td>This intentionally long note reproduces wrapping pressure in wide cells.</td>
+                    <td>KR Tech Lead</td>
+                    <td>Sample repository cleanup</td>
+                    <td>2026 Q3</td>
+                  </tr>
+                  <tr>
+                    <td>Observability and troubleshooting</td>
+                    <td>4</td>
+                    <td>Support / DevOps</td>
+                    <td>SRE Team</td>
+                    <td><code>\\fileshare\Training\MSEAN\ppt\Observability</code></td>
+                    <td>Trace a request through logs, metrics, and dashboards.</td>
+                    <td>Basic service deployment</td>
+                    <td>Review</td>
+                    <td>The row should not collapse into a tall narrow stack on desktop.</td>
+                    <td>SRE Lead</td>
+                    <td>Dashboard access</td>
+                    <td>2026 Q4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <h3>Code and callouts</h3>
             <p>Inline code such as <code>python -m http.server 4173</code> should remain quiet.</p>
             <div class="code-toolbar">
